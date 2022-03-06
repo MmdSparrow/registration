@@ -1,7 +1,6 @@
 package ir.blacksparrow.websitebackend.swagger;
 
-import io.swagger.annotations.Api;
-import org.springframework.beans.factory.annotation.Configurable;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -25,7 +24,7 @@ public class Config {
                 .paths(PathSelectors.any())
                 .build()
                 .apiInfo(ApiInfo())
-                .tags(new Tag("Category", "Category contain a collection of enums such as role.\n To access to every category they have specific code."), ApiDescriptions());
+                .tags(ApiDescriptions()[0], ApiDescriptions());
     }
 
     private ApiInfo ApiInfo() {
@@ -36,7 +35,7 @@ public class Config {
                 .licenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html")
                 .termsOfServiceUrl("Terms of Service")
                 .version("1.0.0")
-                .contact(new Contact("Digital School", "https://fanap.ir/", "frapod@gmail.com")) //TODO
+                .contact(new Contact("Digital School", "https://blackSparrow.ir/", "esmirk.137@gmail.com")) //TODO
                 .build();
     }
 

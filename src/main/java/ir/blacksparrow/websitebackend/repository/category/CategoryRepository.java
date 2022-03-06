@@ -10,8 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.List;
+import java.util.Optional;
 
-//@Transactional(rea)
+
 @Transactional(readOnly = true)
 @Repository
 public class CategoryRepository extends ParentRepository {
@@ -28,19 +29,19 @@ public class CategoryRepository extends ParentRepository {
         return mapList(categoryEntityList, CategoryDto.class);
     }
 
-    public CategoryDto getById(Long id) {
+    public Optional<CategoryDto> getById(Long id) {
         try {
             CategoryEntity categoryEntity = categoryRepository.getById(id);
-            return getModelMapper().map(categoryEntity, CategoryDto.class);
+            return Optional.of(getModelMapper().map(categoryEntity, CategoryDto.class));
         } catch (Exception ex) {
-            return null;
+            return Optional.empty();
         }
     }
 
-    public CategoryDto insertAndUpdate(CategoryDto categoryDto) {
+    public Optional<CategoryDto> insertAndUpdate(CategoryDto categoryDto) {
         CategoryEntity categoryEntity = getModelMapper().map(categoryDto, CategoryEntity.class);
         categoryEntity = categoryRepository.save(categoryEntity);
-        return getModelMapper().map(categoryEntity, CategoryDto.class);
+        return Optional.of(getModelMapper().map(categoryEntity, CategoryDto.class));
     }
 
     public List<CategoryDto> search(CategoryDto categoryDto) {

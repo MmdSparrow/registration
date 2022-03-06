@@ -5,6 +5,7 @@ import ir.blacksparrow.websitebackend.repository.category.CategoryRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CategoryService implements ICategoryService {
@@ -25,12 +26,12 @@ public class CategoryService implements ICategoryService {
     }
 
     @Override
-    public CategoryDto getCategoryById(long id) {
+    public Optional<CategoryDto> getCategoryById(long id) {
         return categoryRepository.getById(id);
     }
 
     @Override
-    public CategoryDto insertAndUpdateCategory(CategoryDto categoryDto) {
+    public Optional<CategoryDto> insertAndUpdateCategory(CategoryDto categoryDto) {
         return categoryRepository.insertAndUpdate(categoryDto);
     }
 

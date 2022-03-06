@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/category")
@@ -101,7 +102,7 @@ public class CategoryController extends ParentController {
             @RequestBody CategoryViewDtoIdChild category
     ) {
         try {
-            CategoryDto categoryDto = categoryService.insertAndUpdateCategory(getMapper().map(category, CategoryDto.class));
+            Optional<CategoryDto> categoryDto = categoryService.insertAndUpdateCategory(getMapper().map(category, CategoryDto.class));
             return sendResponse(new ResponseDto(true, null, categoryDto), HttpStatus.OK);
         } catch (Exception e) {
             return sendResponse(new ResponseDto(false, e.getMessage(), null), HttpStatus.BAD_REQUEST);

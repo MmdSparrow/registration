@@ -15,7 +15,7 @@ import java.util.Collections;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "DGS_CATEGORY_ELEMENT", uniqueConstraints = {
+@Table(name = "USER", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"EMAIL_ADDRESS"})
 })
 public class UserEntity implements UserDetails {

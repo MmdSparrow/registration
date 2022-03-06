@@ -3,7 +3,6 @@ package ir.blacksparrow.websitebackend.repository.categoryElement;
 import ir.blacksparrow.websitebackend.business.dto.CategoryElementDto;
 import ir.blacksparrow.websitebackend.dataModel.CategoryElementEntity;
 import ir.blacksparrow.websitebackend.repository.ParentRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
