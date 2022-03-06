@@ -1,6 +1,7 @@
 package ir.blacksparrow.websitebackend.swagger;
 
 
+import io.swagger.annotations.Api;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -11,6 +12,7 @@ import springfox.documentation.service.Contact;
 import springfox.documentation.service.Tag;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 
 
 @Configuration
@@ -19,12 +21,11 @@ public class Config {
     public Docket DocketSwaggerConfiguration() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-//                .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
-                .apis(RequestHandlerSelectors.basePackage("ir.blacksparrow.websitebackend/view/controller"))
+                .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
                 .paths(PathSelectors.any())
                 .build()
-                .apiInfo(ApiInfo())
-                .tags(ApiDescriptions()[0], ApiDescriptions());
+                .groupName("springshop-public")
+                .apiInfo(ApiInfo());
     }
 
     private ApiInfo ApiInfo() {

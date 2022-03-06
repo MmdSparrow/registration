@@ -15,7 +15,7 @@ import java.util.Collections;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "USER", uniqueConstraints = {
+@Table(name = "BS_USER", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"EMAIL_ADDRESS"})
 })
 public class UserEntity implements UserDetails {
@@ -37,6 +37,7 @@ public class UserEntity implements UserDetails {
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CATEGORY_ELEMENT_ID", referencedColumnName = "ID")
     private CategoryElementEntity categoryElementEntity;
 
     @Column(name = "LOCKED")

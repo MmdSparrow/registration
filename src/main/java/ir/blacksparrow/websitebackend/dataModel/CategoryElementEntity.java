@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name = "CATEGORY_ELEMENT", uniqueConstraints = {
+@Table(name = "BS_CATEGORY_ELEMENT", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"CODE"})
 })
 public class CategoryElementEntity {
