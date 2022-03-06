@@ -18,7 +18,7 @@ import java.util.Collections;
 @Table(name = "BS_USER", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"EMAIL_ADDRESS"})
 })
-public class UserEntity implements UserDetails {
+public class UserEntity {
     @Id
     @Column(name = "USERNAME")
     private String username;
@@ -47,39 +47,4 @@ public class UserEntity implements UserDetails {
     private Boolean enabled;
 
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(categoryElementEntity.getTitle());
-        return Collections.singletonList(authority);
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public String getUsername() {
-        return username;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return !locked;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return enabled;
-    }
 }

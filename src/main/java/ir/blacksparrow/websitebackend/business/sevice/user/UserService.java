@@ -1,20 +1,39 @@
 package ir.blacksparrow.websitebackend.business.sevice.user;
 
+import ir.blacksparrow.websitebackend.business.dto.UserDto;
 import ir.blacksparrow.websitebackend.repository.user.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @AllArgsConstructor
 @Service
 public class UserService implements IUserService, UserDetailsService {
     private final UserRepository userRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return userRepository.findByEmail(email)
+    public UserDetails loadUserByUsername(String emailAddress) throws UsernameNotFoundException {
+        return userRepository.findByEmail(emailAddress)
                 .orElseThrow(()-> new UsernameNotFoundException("user not found!"));
+    }
+
+
+
+    public String signupUser(UserDto user){
+        boolean userExist = userRepository.findByEmail(user.getEmailAddress()).isPresent();
+        if(userExist)
+            throw new IllegalStateException("email already exist!");
+
+        String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
+
+//        userRepository.sa
+        //todo: send confirmation token
+        return "string";
     }
 }
