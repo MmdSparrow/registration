@@ -3,22 +3,25 @@ package ir.blacksparrow.websitebackend.repository.category;
 import ir.blacksparrow.websitebackend.business.dto.CategoryDto;
 import ir.blacksparrow.websitebackend.dataModel.CategoryEntity;
 import ir.blacksparrow.websitebackend.repository.ParentRepository;
-import ir.blacksparrow.websitebackend.repository.categoryElement.ICategoryElementRepository;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-
+//@AllArgsConstructor
 @Repository
 public class CategoryRepository extends ParentRepository {
+//    private final ModelMapper modelMapper;
     private final ICategoryRepository categoryRepository;
-    private final ICategoryElementRepository categoryElementRepository;
 
-    public CategoryRepository(ICategoryRepository categoryRepository, ICategoryElementRepository categoryElementRepository) {
+    @Autowired
+    public CategoryRepository(ModelMapper modelMapper, ICategoryRepository categoryRepository) {
+        super(modelMapper);
         this.categoryRepository = categoryRepository;
-        this.categoryElementRepository = categoryElementRepository;
     }
 
     public List<CategoryDto> findAll() {
@@ -38,6 +41,11 @@ public class CategoryRepository extends ParentRepository {
     public Optional<CategoryDto> insertAndUpdate(CategoryDto categoryDto) {
         CategoryEntity categoryEntity = getModelMapper().map(categoryDto, CategoryEntity.class);
         categoryEntity = categoryRepository.save(categoryEntity);
+        System.out.println("insert...............................................");
+        System.out.println(Arrays.toString(categoryDto.getCategoryElementList().toArray()));
+        System.out.println("insert...............................................");
+        System.out.println(Arrays.toString(categoryEntity.getCategoryElementEntity().toArray()));
+        System.out.println("insert...............................................");
         return Optional.of(getModelMapper().map(categoryEntity, CategoryDto.class));
     }
 

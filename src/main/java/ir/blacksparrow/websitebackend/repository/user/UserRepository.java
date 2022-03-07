@@ -4,20 +4,24 @@ import ir.blacksparrow.websitebackend.business.dto.UserDto;
 import ir.blacksparrow.websitebackend.dataModel.PersonEntity;
 import ir.blacksparrow.websitebackend.dataModel.UserEntity;
 import ir.blacksparrow.websitebackend.repository.ParentRepository;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Repository;
 import org.modelmapper.ModelMapper;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
 
-@AllArgsConstructor
-@Transactional(readOnly = true)
+
+
 @Repository
 public class UserRepository extends ParentRepository {
 
     private final IUserRepository userRepository;
+
+    @Autowired
+    public UserRepository(ModelMapper modelMapper, IUserRepository userRepository) {
+        super(modelMapper);
+        this.userRepository = userRepository;
+    }
 
     public Optional<UserDto> findByEmail(String emailAddress){
         return Optional.of(getModelMapper().map(userRepository.findByEmailAddress(emailAddress),UserDto.class));

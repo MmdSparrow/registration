@@ -1,15 +1,17 @@
 package ir.blacksparrow.websitebackend.dataModel;
 
-import com.sun.istack.NotNull;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @Entity
-@Table(name = "BS_CATEGORY",uniqueConstraints={
-        @UniqueConstraint(columnNames={"CODE", "TITLE"})
+@Table(name = "BS_CATEGORY", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"CODE", "TITLE"})
 })
 public class CategoryEntity {
     @Id
@@ -25,7 +27,6 @@ public class CategoryEntity {
     @Column(name = "TITLE")
     private String title;
 
-    @NotNull
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "CATEGORY_ELEMENT_ID", referencedColumnName = "ID")
     private Set<CategoryElementEntity> categoryElementEntity;

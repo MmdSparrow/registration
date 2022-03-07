@@ -2,18 +2,18 @@ package ir.blacksparrow.websitebackend.business.sevice.category;
 
 import ir.blacksparrow.websitebackend.business.dto.CategoryDto;
 import ir.blacksparrow.websitebackend.repository.category.CategoryRepository;
+import ir.blacksparrow.websitebackend.repository.categoryElement.CategoryElementRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@AllArgsConstructor
 @Service
 public class CategoryService implements ICategoryService {
     private final CategoryRepository categoryRepository;
-
-    public CategoryService(CategoryRepository categoryRepository) {
-        this.categoryRepository = categoryRepository;
-    }
+    private final CategoryElementRepository categoryElementRepository;
 
     @Override
     public List<CategoryDto> getCategoryList() {
@@ -32,6 +32,8 @@ public class CategoryService implements ICategoryService {
 
     @Override
     public Optional<CategoryDto> insertAndUpdateCategory(CategoryDto categoryDto) {
+        if(categoryDto.getCategoryElementList()!=null)
+            categoryElementRepository.insertAndUpdateAll(categoryDto.getCategoryElementList());
         return categoryRepository.insertAndUpdate(categoryDto);
     }
 

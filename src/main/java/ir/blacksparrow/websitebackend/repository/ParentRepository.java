@@ -8,7 +8,11 @@ import java.util.stream.Collectors;
 
 @Data
 public class ParentRepository {
-    private final ModelMapper modelMapper=new ModelMapper();
+    private ModelMapper modelMapper;
+
+    public ParentRepository(ModelMapper modelMapper) {
+        this.modelMapper = modelMapper;
+    }
 
     protected <S, T> List<T> mapList(List<S> source, Class<T> targetClass) {
         return source

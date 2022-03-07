@@ -1,12 +1,14 @@
 package ir.blacksparrow.websitebackend.dataModel;
 
 import com.sun.istack.NotNull;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "BS_CATEGORY_ELEMENT", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"CODE"})
@@ -24,6 +26,4 @@ public class CategoryElementEntity {
     @NotNull
     @Column(name = "TITLE")
     private String title;
-
-
 }
