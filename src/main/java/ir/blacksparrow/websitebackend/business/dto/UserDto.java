@@ -2,7 +2,9 @@ package ir.blacksparrow.websitebackend.business.dto;
 
 import ir.blacksparrow.websitebackend.dataModel.CategoryElementEntity;
 import ir.blacksparrow.websitebackend.dataModel.PersonEntity;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,6 +12,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Collections;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
 public class UserDto  implements UserDetails {
     private String username;

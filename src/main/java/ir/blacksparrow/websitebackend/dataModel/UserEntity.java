@@ -3,6 +3,7 @@ package ir.blacksparrow.websitebackend.dataModel;
 
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -12,6 +13,7 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -33,18 +35,18 @@ public class UserEntity {
 
     @NotNull
     @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PERSON_ID", referencedColumnName = "NATIONAL_ID")
     private PersonEntity personEntity;
 
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "CATEGORY_ELEMENT_ID", referencedColumnName = "ID")
-    private CategoryElementEntity categoryElementEntity;
+//    @NotNull
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "CATEGORY_ELEMENT_ID", referencedColumnName = "ID")
+//    private CategoryElementEntity categoryElementEntity;
 
     @Column(name = "LOCKED")
     private Boolean locked;
 
     @Column(name = "ENABLED")
     private Boolean enabled;
-
 
 }

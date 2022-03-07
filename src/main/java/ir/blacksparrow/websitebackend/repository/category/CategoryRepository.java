@@ -4,16 +4,13 @@ import ir.blacksparrow.websitebackend.business.dto.CategoryDto;
 import ir.blacksparrow.websitebackend.dataModel.CategoryEntity;
 import ir.blacksparrow.websitebackend.repository.ParentRepository;
 import ir.blacksparrow.websitebackend.repository.categoryElement.ICategoryElementRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.List;
 import java.util.Optional;
 
 
-@Transactional(readOnly = true)
 @Repository
 public class CategoryRepository extends ParentRepository {
     private final ICategoryRepository categoryRepository;

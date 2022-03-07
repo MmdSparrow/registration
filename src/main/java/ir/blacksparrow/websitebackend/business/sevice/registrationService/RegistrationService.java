@@ -18,7 +18,10 @@ public class RegistrationService implements IRegistrationService{
         boolean isValidEmail = emailValidatorService.test(request.getEmailAddress());
         if(!isValidEmail){
             throw new IllegalAccessException("email not valid");
-        };
+        }
+        System.out.println("in register method in registration service......................");
+        System.out.println(request);
+        System.out.println("in register method in registration service......................");
         return userService.signupUser(
                 new UserDto(
                         request.getUsername(),

@@ -1,10 +1,12 @@
 package ir.blacksparrow.websitebackend.dataModel;
 
 import com.sun.istack.NotNull;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Set;
 
+@Data
 @Entity
 @Table(name = "BS_CATEGORY",uniqueConstraints={
         @UniqueConstraint(columnNames={"CODE", "TITLE"})
