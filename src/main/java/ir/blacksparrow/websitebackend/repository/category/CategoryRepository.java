@@ -7,15 +7,12 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 //@AllArgsConstructor
 @Repository
 public class CategoryRepository extends ParentRepository {
-//    private final ModelMapper modelMapper;
     private final ICategoryRepository categoryRepository;
 
     @Autowired
@@ -41,11 +38,6 @@ public class CategoryRepository extends ParentRepository {
     public Optional<CategoryDto> insertAndUpdate(CategoryDto categoryDto) {
         CategoryEntity categoryEntity = getModelMapper().map(categoryDto, CategoryEntity.class);
         categoryEntity = categoryRepository.save(categoryEntity);
-        System.out.println("insert...............................................");
-        System.out.println(Arrays.toString(categoryDto.getCategoryElementList().toArray()));
-        System.out.println("insert...............................................");
-        System.out.println(Arrays.toString(categoryEntity.getCategoryElementEntity().toArray()));
-        System.out.println("insert...............................................");
         return Optional.of(getModelMapper().map(categoryEntity, CategoryDto.class));
     }
 
@@ -58,4 +50,6 @@ public class CategoryRepository extends ParentRepository {
     public void delete(Long id) {
         categoryRepository.deleteById(id);
     }
+
+
 }

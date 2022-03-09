@@ -9,5 +9,4 @@ public class CategoryDto {
     private Long id;
     private String code;
     private String title;
-    private List<CategoryElementDto> categoryElementList;
 }

@@ -9,9 +9,9 @@ public interface ICategoryElementService {
     List<CategoryElementDto> searchCategoryElement(String code,String title,Long categoryId,String categoryCode);
     CategoryElementDto getCategoryElementById(long id);
 
-    CategoryElementDto insertCategoryElement(CategoryElementDto categoryElementDto);
+    CategoryElementDto insertAndUpdateCategoryElement(CategoryElementDto categoryElementDto);
 
-    CategoryElementDto updateCategoryElement(CategoryElementDto categoryElementDto);
+    List<CategoryElementDto> insertAndUpdateAllCategoryElement(List<CategoryElementDto> categoryElementDtoList);
 
     void deleteCategory(Long id);
 }

@@ -3,8 +3,10 @@ package ir.blacksparrow.websitebackend.dataModel;
 import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Set;
 
 
 @Getter
@@ -15,7 +17,6 @@ import javax.persistence.*;
 })
 public class CategoryElementEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "ID")
     private long id;
 
@@ -26,4 +27,8 @@ public class CategoryElementEntity {
     @NotNull
     @Column(name = "TITLE")
     private String title;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CATEGORY_ID", referencedColumnName = "ID")
+    private CategoryEntity categoryEntity;
 }

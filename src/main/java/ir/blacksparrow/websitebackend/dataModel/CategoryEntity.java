@@ -26,8 +26,4 @@ public class CategoryEntity {
     @NotNull
     @Column(name = "TITLE")
     private String title;
-
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "CATEGORY_ELEMENT_ID", referencedColumnName = "ID")
-    private Set<CategoryElementEntity> categoryElementEntity;
 }

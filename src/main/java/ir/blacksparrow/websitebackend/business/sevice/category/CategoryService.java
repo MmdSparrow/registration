@@ -13,7 +13,6 @@ import java.util.Optional;
 @Service
 public class CategoryService implements ICategoryService {
     private final CategoryRepository categoryRepository;
-    private final CategoryElementRepository categoryElementRepository;
 
     @Override
     public List<CategoryDto> getCategoryList() {
@@ -32,8 +31,6 @@ public class CategoryService implements ICategoryService {
 
     @Override
     public Optional<CategoryDto> insertAndUpdateCategory(CategoryDto categoryDto) {
-        if(categoryDto.getCategoryElementList()!=null)
-            categoryElementRepository.insertAndUpdateAll(categoryDto.getCategoryElementList());
         return categoryRepository.insertAndUpdate(categoryDto);
     }
 

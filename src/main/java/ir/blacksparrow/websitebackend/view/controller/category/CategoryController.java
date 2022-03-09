@@ -6,8 +6,7 @@ import ir.blacksparrow.websitebackend.business.sevice.category.CategoryService;
 import ir.blacksparrow.websitebackend.business.sevice.category.ICategoryService;
 import ir.blacksparrow.websitebackend.view.controller.ParentController;
 import ir.blacksparrow.websitebackend.view.controller.category.validator.CategoryValidator;
-import ir.blacksparrow.websitebackend.view.viewDto.category.viewDto.CategoryViewDtoIdChild;
-import ir.blacksparrow.websitebackend.view.viewDto.category.viewDto.CategoryViewDtoObjectChild;
+import ir.blacksparrow.websitebackend.view.viewDto.category.viewDto.CategoryViewDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -99,7 +98,7 @@ public class CategoryController extends ParentController {
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<ResponseDto> addCategory(
-            @RequestBody CategoryViewDtoObjectChild category
+            @RequestBody CategoryViewDto category
     ) {
         try {
             Optional<CategoryDto> categoryDto = categoryService.insertAndUpdateCategory(getMapper().map(category, CategoryDto.class));

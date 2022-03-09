@@ -1,16 +1,21 @@
 package ir.blacksparrow.websitebackend.business.sevice.categoryElement;
 
 import ir.blacksparrow.websitebackend.business.dto.CategoryElementDto;
+import ir.blacksparrow.websitebackend.repository.categoryElement.CategoryElementRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@AllArgsConstructor
 @Service
-public class CategoryElementService implements ICategoryElementService{
+public class CategoryElementService implements ICategoryElementService {
+
+    private final CategoryElementRepository categoryElementRepository;
 
     @Override
     public List<CategoryElementDto> getCategoryElementList() {
-        return null;
+        return categoryElementRepository.findAll();
     }
 
     @Override
@@ -20,21 +25,21 @@ public class CategoryElementService implements ICategoryElementService{
 
     @Override
     public CategoryElementDto getCategoryElementById(long id) {
-        return null;
+        return categoryElementRepository.getById(id);
     }
 
     @Override
-    public CategoryElementDto insertCategoryElement(CategoryElementDto categoryElementDto) {
-        return null;
+    public CategoryElementDto insertAndUpdateCategoryElement(CategoryElementDto categoryElementDto) {
+        return categoryElementRepository.insertAndUpdate(categoryElementDto);
     }
 
     @Override
-    public CategoryElementDto updateCategoryElement(CategoryElementDto categoryElementDto) {
-        return null;
+    public List<CategoryElementDto> insertAndUpdateAllCategoryElement(List<CategoryElementDto> categoryElementDtoList) {
+        return categoryElementRepository.insertAndUpdateAll(categoryElementDtoList);
     }
 
     @Override
     public void deleteCategory(Long id) {
-
+        categoryElementRepository.delete(id);
     }
 }

@@ -9,7 +9,6 @@ import java.util.Date;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @ToString
 @Entity
 @Table(name = "BS_PERSON")
