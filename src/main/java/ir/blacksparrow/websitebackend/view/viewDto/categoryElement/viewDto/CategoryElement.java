@@ -5,7 +5,6 @@ import lombok.Data;
 
 @Data
 public class CategoryElement {
-    private Long id;
     private String code;
     private String title;
     private CategoryViewDto category;

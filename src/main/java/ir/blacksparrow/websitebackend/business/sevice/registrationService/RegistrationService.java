@@ -1,9 +1,8 @@
 package ir.blacksparrow.websitebackend.business.sevice.registrationService;
 
 import ir.blacksparrow.websitebackend.business.dto.UserDto;
-import ir.blacksparrow.websitebackend.business.sevice.emailValidator.EmailValidatorService;
 import ir.blacksparrow.websitebackend.business.sevice.user.UserService;
-import ir.blacksparrow.websitebackend.view.viewDto.user.viewDto.UserViewDtoObjectChild;
+import ir.blacksparrow.websitebackend.business.sevice.emailValidator.EmailValidatorService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

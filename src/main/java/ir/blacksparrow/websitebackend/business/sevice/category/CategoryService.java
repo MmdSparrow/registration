@@ -2,7 +2,6 @@ package ir.blacksparrow.websitebackend.business.sevice.category;
 
 import ir.blacksparrow.websitebackend.business.dto.CategoryDto;
 import ir.blacksparrow.websitebackend.repository.category.CategoryRepository;
-import ir.blacksparrow.websitebackend.repository.categoryElement.CategoryElementRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +19,18 @@ public class CategoryService implements ICategoryService {
     }
 
     @Override
+    public List<CategoryDto> getCategoryList(int offset, int size) {
+        return categoryRepository.findAll(offset, size);
+    }
+
+    @Override
     public List<CategoryDto> searchCategory(CategoryDto categoryDto) {
         return categoryRepository.search(categoryDto);
+    }
+
+    @Override
+    public List<CategoryDto> searchCategory(CategoryDto categoryDto, int offset, int size) {
+        return categoryRepository.search(categoryDto, offset, size);
     }
 
     @Override

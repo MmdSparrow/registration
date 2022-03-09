@@ -13,7 +13,7 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "BS_CATEGORY_ELEMENT", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"CODE"})
+        @UniqueConstraint(columnNames = {"CODE", "TITLE", "CATEGORY_ID"})
 })
 public class CategoryElementEntity {
     @Id

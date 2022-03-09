@@ -26,6 +26,11 @@ public class CategoryRepository extends ParentRepository {
         return mapList(categoryEntityList, CategoryDto.class);
     }
 
+    public List<CategoryDto> findAll(int offset, int size) {
+        List<CategoryEntity> categoryEntityList = categoryRepository.findAll(offset, size);
+        return mapList(categoryEntityList, CategoryDto.class);
+    }
+
     public Optional<CategoryDto> getById(Long id) {
         try {
             CategoryEntity categoryEntity = categoryRepository.getById(id);
@@ -42,8 +47,12 @@ public class CategoryRepository extends ParentRepository {
     }
 
     public List<CategoryDto> search(CategoryDto categoryDto) {
-        List<CategoryEntity> categoryEntityList = categoryRepository.search(categoryDto.getCode(),
-                categoryDto.getTitle());
+        List<CategoryEntity> categoryEntityList = categoryRepository.search(categoryDto.getCode(), categoryDto.getTitle());
+        return mapList(categoryEntityList, CategoryDto.class);
+    }
+
+    public List<CategoryDto> search(CategoryDto categoryDto, int offset, int size) {
+        List<CategoryEntity> categoryEntityList = categoryRepository.search(categoryDto.getCode(), categoryDto.getTitle(), offset, size);
         return mapList(categoryEntityList, CategoryDto.class);
     }
 
