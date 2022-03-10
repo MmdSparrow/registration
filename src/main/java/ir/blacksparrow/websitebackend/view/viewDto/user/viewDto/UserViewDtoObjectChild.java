@@ -27,6 +27,9 @@ public class UserViewDtoObjectChild {
     @NotNull
     private PersonViewDto person;
 
+    @NotNull
+    private long categoryElementId;
+
     private Boolean locked;
 
     private Boolean enabled;

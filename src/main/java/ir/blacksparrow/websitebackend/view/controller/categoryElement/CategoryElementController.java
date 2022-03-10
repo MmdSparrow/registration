@@ -19,7 +19,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-@Transactional
+//@Transactional
 @RestController
 @RequestMapping("/category-element")
 public class CategoryElementController extends ParentController {

@@ -26,5 +26,8 @@ public class UserViewDtoIdChild {
     private String emailAddress;
 
     @NotNull
-    private Long personId;
+    private long personId;
+
+    @NotNull
+    private long categoryElementId;
 }

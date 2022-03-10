@@ -1,7 +1,7 @@
 package ir.blacksparrow.websitebackend.dataModel;
 
 
-import com.sun.istack.NotNull;
+import javax.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 

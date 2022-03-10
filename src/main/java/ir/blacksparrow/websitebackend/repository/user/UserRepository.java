@@ -35,7 +35,7 @@ public class UserRepository extends ParentRepository {
         personEntity.setLastName(user.getPerson().getLastName());
         personEntity.setNationalId(user.getPerson().getNationalId());
         userEntity.setPersonEntity(personEntity);
-//        userEntity.getPersonEntity().setBirthday(user.getPerson().getBirthday());
+        userEntity.getPersonEntity().setBirthday(user.getPerson().getBirthday());
         //todo
 
         System.out.println(userEntity.getPersonEntity().getNationalId());
