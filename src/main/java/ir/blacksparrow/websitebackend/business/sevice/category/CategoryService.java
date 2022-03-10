@@ -24,13 +24,13 @@ public class CategoryService implements ICategoryService {
     }
 
     @Override
-    public List<CategoryDto> searchCategory(CategoryDto categoryDto) {
-        return categoryRepository.search(categoryDto);
+    public List<CategoryDto> searchCategory(String code, String title) {
+        return categoryRepository.search(code, title);
     }
 
     @Override
-    public List<CategoryDto> searchCategory(CategoryDto categoryDto, int offset, int size) {
-        return categoryRepository.search(categoryDto, offset, size);
+    public List<CategoryDto> searchCategory(String code, String title, int offset, int size) {
+        return categoryRepository.search(code, title, offset, size);
     }
 
     @Override

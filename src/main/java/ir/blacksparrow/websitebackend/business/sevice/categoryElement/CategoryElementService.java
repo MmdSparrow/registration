@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 @Service
@@ -19,17 +20,22 @@ public class CategoryElementService implements ICategoryElementService {
     }
 
     @Override
+    public List<CategoryElementDto> getCategoryElementList(int offset, int size) {
+        return categoryElementRepository.findAll(offset, size);
+    }
+
+    @Override
     public List<CategoryElementDto> searchCategoryElement(String code, String title, Long categoryId, String categoryCode) {
         return null;
     }
 
     @Override
-    public CategoryElementDto getCategoryElementById(long id) {
+    public Optional<CategoryElementDto> getCategoryElementById(long id) {
         return categoryElementRepository.getById(id);
     }
 
     @Override
-    public CategoryElementDto insertAndUpdateCategoryElement(CategoryElementDto categoryElementDto) {
+    public Optional<CategoryElementDto> insertAndUpdateCategoryElement(CategoryElementDto categoryElementDto) {
         return categoryElementRepository.insertAndUpdate(categoryElementDto);
     }
 

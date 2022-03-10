@@ -8,8 +8,8 @@ import java.util.Optional;
 public interface ICategoryService {
     List<CategoryDto> getCategoryList();
     List<CategoryDto> getCategoryList(int offset, int size);
-    List<CategoryDto> searchCategory(CategoryDto categoryDto);
-    List<CategoryDto> searchCategory(CategoryDto categoryDto, int offset, int size);
+    List<CategoryDto> searchCategory(String code, String title);
+    List<CategoryDto> searchCategory(String code, String title, int offset, int size);
     Optional<CategoryDto> getCategoryById(long id);
     Optional<CategoryDto> insertAndUpdateCategory(CategoryDto categoryDto);
     void deleteCategory(Long id);

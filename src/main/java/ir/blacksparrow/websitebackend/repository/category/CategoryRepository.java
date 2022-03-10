@@ -40,22 +40,18 @@ public class CategoryRepository extends ParentRepository {
     }
 
     public Optional<CategoryDto> insertAndUpdate(CategoryDto categoryDto) {
-        System.out.println("1111111111111111111111111111");
-        System.out.println(categoryDto.toString());
         CategoryEntity categoryEntity = getModelMapper().map(categoryDto, CategoryEntity.class);
-        System.out.println("1111111111111111111111111111");
-        System.out.println(categoryEntity.toString());
         categoryEntity = categoryRepository.save(categoryEntity);
         return Optional.of(getModelMapper().map(categoryEntity, CategoryDto.class));
     }
 
-    public List<CategoryDto> search(CategoryDto categoryDto) {
-        List<CategoryEntity> categoryEntityList = categoryRepository.search(categoryDto.getCode(), categoryDto.getTitle());
+    public List<CategoryDto> search(String code, String title) {
+        List<CategoryEntity> categoryEntityList = categoryRepository.search(code, title);
         return mapList(categoryEntityList, CategoryDto.class);
     }
 
-    public List<CategoryDto> search(CategoryDto categoryDto, int offset, int size) {
-        List<CategoryEntity> categoryEntityList = categoryRepository.search(categoryDto.getCode(), categoryDto.getTitle(), offset, size);
+    public List<CategoryDto> search(String code, String title, int offset, int size) {
+        List<CategoryEntity> categoryEntityList = categoryRepository.search(code, title, offset, size);
         return mapList(categoryEntityList, CategoryDto.class);
     }
 
