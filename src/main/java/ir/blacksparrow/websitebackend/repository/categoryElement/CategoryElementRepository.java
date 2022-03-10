@@ -5,7 +5,6 @@ import ir.blacksparrow.websitebackend.dataModel.CategoryElementEntity;
 import ir.blacksparrow.websitebackend.repository.ParentRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,7 +13,7 @@ import java.util.List;
 public class CategoryElementRepository extends ParentRepository {
     private final ICategoryElementRepository categoryElementRepository;
 
-    @Autowired
+
     public CategoryElementRepository(ModelMapper modelMapper, ICategoryElementRepository categoryElementRepository) {
         super(modelMapper);
         this.categoryElementRepository = categoryElementRepository;

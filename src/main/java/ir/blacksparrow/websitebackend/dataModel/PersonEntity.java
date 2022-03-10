@@ -8,8 +8,6 @@ import java.util.Date;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@ToString
 @Entity
 @Table(name = "BS_PERSON")
 public class PersonEntity {
@@ -26,11 +24,11 @@ public class PersonEntity {
     @Column(name = "LAST_NAME")
     private String lastName;
 
-//    @NotNull
-//    @Column(name = "BIRTH_DATE")
-//    private Date birthday;
+    @NotNull
+    @Column(name = "BIRTH_DATE")
+    private Date birthday;
 
-//    @NotNull
-//    @Column(name = "BALACNE", columnDefinition = "REAL DEFAULT 0")
-//    private double balance;
+    @NotNull
+    @Column(name = "BALACNE", columnDefinition = "REAL DEFAULT 0")
+    private double balance;
 }

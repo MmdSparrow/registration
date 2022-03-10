@@ -33,10 +33,10 @@ public class UserService implements IUserService, UserDetailsService {
 
         String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
-
-        System.out.println("signup user....................................................");
-        System.out.println(user);
-        System.out.println("signup user....................................................");
+//
+//        System.out.println("signup user....................................................");
+//        System.out.println(user);
+//        System.out.println("signup user....................................................");
 
         personRepository.insertAndUpdate(user.getPerson());
 //        userRepository.insert(user);

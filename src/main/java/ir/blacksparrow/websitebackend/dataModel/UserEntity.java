@@ -2,9 +2,7 @@ package ir.blacksparrow.websitebackend.dataModel;
 
 
 import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,13 +11,10 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
+@Setter
 @Entity
-@Table(name = "BS_USER", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"EMAIL_ADDRESS"})
-})
+@Table(name = "BS_USER")
 public class UserEntity {
     @Id
     @Column(name = "USERNAME")
@@ -30,7 +25,7 @@ public class UserEntity {
     private String password;
 
     @NotNull
-    @Column(name = "EMAIL_ADDRESS")
+    @Column(name = "EMAIL_ADDRESS", unique = true)
     private String emailAddress;
 
     @NotNull
@@ -38,10 +33,10 @@ public class UserEntity {
     @JoinColumn(name = "PERSON_ID", referencedColumnName = "NATIONAL_ID")
     private PersonEntity personEntity;
 
-//    @NotNull
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "CATEGORY_ELEMENT_ID", referencedColumnName = "ID")
-//    private CategoryElementEntity categoryElementEntity;
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CATEGORY_ELEMENT_ID", referencedColumnName = "ID")
+    private CategoryElementEntity categoryElementEntity;
 
     @Column(name = "LOCKED")
     private Boolean locked;

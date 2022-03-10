@@ -10,12 +10,11 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-//@AllArgsConstructor
+
 @Repository
 public class CategoryRepository extends ParentRepository {
     private final ICategoryRepository categoryRepository;
 
-    @Autowired
     public CategoryRepository(ModelMapper modelMapper, ICategoryRepository categoryRepository) {
         super(modelMapper);
         this.categoryRepository = categoryRepository;
@@ -41,7 +40,11 @@ public class CategoryRepository extends ParentRepository {
     }
 
     public Optional<CategoryDto> insertAndUpdate(CategoryDto categoryDto) {
+        System.out.println("1111111111111111111111111111");
+        System.out.println(categoryDto.toString());
         CategoryEntity categoryEntity = getModelMapper().map(categoryDto, CategoryEntity.class);
+        System.out.println("1111111111111111111111111111");
+        System.out.println(categoryEntity.toString());
         categoryEntity = categoryRepository.save(categoryEntity);
         return Optional.of(getModelMapper().map(categoryEntity, CategoryDto.class));
     }

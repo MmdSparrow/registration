@@ -7,6 +7,8 @@ import ir.blacksparrow.websitebackend.business.sevice.category.ICategoryService;
 import ir.blacksparrow.websitebackend.view.controller.ParentController;
 import ir.blacksparrow.websitebackend.view.controller.category.validator.CategoryValidator;
 import ir.blacksparrow.websitebackend.view.viewDto.category.viewDto.CategoryViewDto;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +23,8 @@ public class CategoryController extends ParentController {
 
     private final ICategoryService categoryService;
 
-    public CategoryController(CategoryService category) {
+    public CategoryController(ModelMapper modelMapper, CategoryService category) {
+        super(modelMapper);
         this.categoryService = category;
     }
 
@@ -105,7 +108,7 @@ public class CategoryController extends ParentController {
             @RequestBody CategoryViewDto category
     ) {
         try {
-            Optional<CategoryDto> categoryDto = categoryService.insertAndUpdateCategory(getMapper().map(category, CategoryDto.class));
+            Optional<CategoryDto> categoryDto = categoryService.insertAndUpdateCategory(getModelMapper().map(category, CategoryDto.class));
             return sendResponse(new ResponseDto(true, null, categoryDto), HttpStatus.OK);
         } catch (Exception e) {
             return sendResponse(new ResponseDto(false, e.getMessage(), null), HttpStatus.BAD_REQUEST);
@@ -122,7 +125,7 @@ public class CategoryController extends ParentController {
             @PathVariable Long id
     ) {
         try {
-            CategoryDto categoryDto = getMapper().map(category, CategoryDto.class);
+            CategoryDto categoryDto = getModelMapper().map(category, CategoryDto.class);
             categoryDto.setId(id);
             categoryDto = categoryService.insertAndUpdateCategory(categoryDto).orElse(null);
             return sendResponse(new ResponseDto(true,null, categoryDto), HttpStatus.OK);
