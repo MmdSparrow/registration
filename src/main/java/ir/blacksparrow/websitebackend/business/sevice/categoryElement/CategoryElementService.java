@@ -32,8 +32,6 @@ public class CategoryElementService implements ICategoryElementService {
     @Override
     public List<CategoryElementDto> searchCategoryElement(CategoryElementDto categoryElementDto) {
         return categoryElementRepository.search(categoryElementDto.getCode(),categoryElementDto.getTitle(),categoryElementDto.getCategory().getId(),categoryElementDto.getCategory().getCode(), categoryElementDto.getCategory().getTitle());
-
-
     }
 
     @Override
@@ -48,6 +46,11 @@ public class CategoryElementService implements ICategoryElementService {
 
     @Override
     public Optional<CategoryElementDto> insertAndUpdateCategoryElement(CategoryElementDtoChildId categoryElementDtoChildId) {
+        System.out.println("1111111111111111111111111111111");
+        System.out.println(categoryElementDtoChildId.toString());
+        System.out.println("1111111111111111111111111111111");
+        System.out.println(categoryRepository.getById(categoryElementDtoChildId.getCategoryId()).orElse(null));
+        System.out.println("1111111111111111111111111111111");
         CategoryElementDto categoryElementDto=new CategoryElementDto(categoryElementDtoChildId.getId(), categoryElementDtoChildId.getCode(), categoryElementDtoChildId.getTitle(), categoryRepository.getById(categoryElementDtoChildId.getCategoryId()).orElse(null));
         return categoryElementRepository.insertAndUpdate(categoryElementDto);
     }

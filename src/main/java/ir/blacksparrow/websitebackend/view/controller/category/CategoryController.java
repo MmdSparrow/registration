@@ -8,15 +8,16 @@ import ir.blacksparrow.websitebackend.view.controller.ParentController;
 import ir.blacksparrow.websitebackend.view.controller.category.validator.CategoryValidator;
 import ir.blacksparrow.websitebackend.view.viewDto.category.viewDto.CategoryViewDto;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
+@Transactional
 @RestController
 @RequestMapping("/category")
 public class CategoryController extends ParentController {
@@ -37,17 +38,17 @@ public class CategoryController extends ParentController {
     ) {
         if (!CategoryValidator.isValidSizeOffset(size, offset))
             return sendResponse(new ResponseDto(false, "invalid size or offset", null), HttpStatus.BAD_REQUEST);
-        if(size==null){
-            try{
+        if (size == null) {
+            try {
                 List<CategoryDto> categoryDtoList = categoryService.getCategoryList();
-                return sendResponse(new ResponseDto(true,null,categoryDtoList,categoryDtoList.size()), HttpStatus.OK);
+                return sendResponse(new ResponseDto(true, null, categoryDtoList, categoryDtoList.size()), HttpStatus.OK);
             } catch (Exception e) {
                 return sendResponse(new ResponseDto(false, e.getMessage(), null), HttpStatus.BAD_REQUEST);
             }
-        }else {
-            try{
+        } else {
+            try {
                 List<CategoryDto> categoryDtoList = categoryService.getCategoryList(offset, size);
-                return sendResponse(new ResponseDto(true,null,categoryDtoList,categoryDtoList.size()), HttpStatus.OK);
+                return sendResponse(new ResponseDto(true, null, categoryDtoList, categoryDtoList.size()), HttpStatus.OK);
             } catch (Exception e) {
                 return sendResponse(new ResponseDto(false, e.getMessage(), null), HttpStatus.BAD_REQUEST);
             }
@@ -58,14 +59,14 @@ public class CategoryController extends ParentController {
             path = "/{id}",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<ResponseDto>  getCategoryById(
-            @PathVariable Long id
+    public ResponseEntity<ResponseDto> getCategoryById(
+            @PathVariable long id
     ) {
         try {
             Optional<CategoryDto> categoryDto = categoryService.getCategoryById(id);
-            return sendResponse(new ResponseDto(true,null,categoryDto), HttpStatus.OK);
+            return sendResponse(new ResponseDto(true, null, categoryDto.orElse(null)), HttpStatus.OK);
         } catch (Exception e) {
-            return sendResponse(new ResponseDto(false,e.getMessage(),null),HttpStatus.BAD_REQUEST);
+            return sendResponse(new ResponseDto(false, e.getMessage(), null), HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -79,20 +80,20 @@ public class CategoryController extends ParentController {
             @RequestParam(value = "offset", required = false) Integer offset,
             @RequestParam(value = "size", required = false) Integer size
     ) {
-        if(!CategoryValidator.isValidSizeOffset(size,offset))
-            return sendResponse(new ResponseDto(false,"invalid size or offset",null), HttpStatus.BAD_REQUEST);
+        if (!CategoryValidator.isValidSizeOffset(size, offset))
+            return sendResponse(new ResponseDto(false, "invalid size or offset", null), HttpStatus.BAD_REQUEST);
 
-        if(size==null){
-            try{
+        if (size == null) {
+            try {
                 List<CategoryDto> categoryDtoList = categoryService.searchCategory(code, title);
-                return sendResponse(new ResponseDto(true,null,categoryDtoList,categoryDtoList.size()), HttpStatus.OK);
+                return sendResponse(new ResponseDto(true, null, categoryDtoList, categoryDtoList.size()), HttpStatus.OK);
             } catch (Exception e) {
                 return sendResponse(new ResponseDto(false, e.getMessage(), null), HttpStatus.BAD_REQUEST);
             }
-        }else {
-            try{
+        } else {
+            try {
                 List<CategoryDto> categoryDtoList = categoryService.searchCategory(code, title, offset, size);
-                return sendResponse(new ResponseDto(true,null,categoryDtoList,categoryDtoList.size()), HttpStatus.OK);
+                return sendResponse(new ResponseDto(true, null, categoryDtoList, categoryDtoList.size()), HttpStatus.OK);
             } catch (Exception e) {
                 return sendResponse(new ResponseDto(false, e.getMessage(), null), HttpStatus.BAD_REQUEST);
             }
@@ -122,15 +123,15 @@ public class CategoryController extends ParentController {
     )
     public ResponseEntity<ResponseDto> editCategory(
             @RequestBody CategoryViewDto category,
-            @PathVariable Long id
+            @PathVariable long id
     ) {
         try {
             CategoryDto categoryDto = getModelMapper().map(category, CategoryDto.class);
             categoryDto.setId(id);
             categoryDto = categoryService.insertAndUpdateCategory(categoryDto).orElse(null);
-            return sendResponse(new ResponseDto(true,null, categoryDto), HttpStatus.OK);
+            return sendResponse(new ResponseDto(true, null, categoryDto), HttpStatus.OK);
         } catch (Exception e) {
-            return sendResponse(new ResponseDto(false,e.getMessage(),null),HttpStatus.BAD_REQUEST);
+            return sendResponse(new ResponseDto(false, e.getMessage(), null), HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -139,13 +140,13 @@ public class CategoryController extends ParentController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<ResponseDto> deleteCategory(
-            @PathVariable Long id
+            @PathVariable long id
     ) {
         try {
             categoryService.deleteCategory(id);
-            return sendResponse(new ResponseDto(true,null,null), HttpStatus.OK);
+            return sendResponse(new ResponseDto(true, null, null), HttpStatus.OK);
         } catch (Exception e) {
-            return sendResponse(new ResponseDto(false,e.getMessage(),null),HttpStatus.BAD_REQUEST);
+            return sendResponse(new ResponseDto(false, e.getMessage(), null), HttpStatus.BAD_REQUEST);
         }
     }
 }

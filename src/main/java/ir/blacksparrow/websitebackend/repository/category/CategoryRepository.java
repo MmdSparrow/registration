@@ -30,13 +30,12 @@ public class CategoryRepository extends ParentRepository {
         return mapList(categoryEntityList, CategoryDto.class);
     }
 
-    public Optional<CategoryDto> getById(Long id) {
-        try {
-            CategoryEntity categoryEntity = categoryRepository.getById(id);
-            return Optional.of(getModelMapper().map(categoryEntity, CategoryDto.class));
-        } catch (Exception ex) {
-            return Optional.empty();
-        }
+    public Optional<CategoryDto> getById(long id) {
+        CategoryEntity categoryEntity = categoryRepository.getById(id);
+        System.out.println(categoryEntity.getId());
+        System.out.println(categoryEntity.getCode());
+        System.out.println(categoryEntity.getTitle());
+        return Optional.of(getModelMapper().map(categoryEntity, CategoryDto.class));
     }
 
     public Optional<CategoryDto> insertAndUpdate(CategoryDto categoryDto) {
