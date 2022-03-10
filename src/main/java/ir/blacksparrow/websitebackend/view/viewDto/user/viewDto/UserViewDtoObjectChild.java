@@ -26,4 +26,8 @@ public class UserViewDtoObjectChild {
 
     @NotNull
     private PersonViewDto person;
+
+    private Boolean locked;
+
+    private Boolean enabled;
 }

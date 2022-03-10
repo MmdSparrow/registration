@@ -21,8 +21,8 @@ public class UserDto  implements UserDetails {
     private String emailAddress;
     private PersonDto person;
     private CategoryElementDto categoryElement;
-    private Boolean locked;
-    private Boolean enabled;
+    private boolean locked;
+    private boolean enabled;
 
 
     public UserDto(String username, String password, String emailAddress, PersonDto person) {

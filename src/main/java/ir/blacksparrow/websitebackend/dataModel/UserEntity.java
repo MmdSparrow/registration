@@ -2,14 +2,10 @@ package ir.blacksparrow.websitebackend.dataModel;
 
 
 import com.sun.istack.NotNull;
-import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.Collections;
 
 @Getter
 @Setter
@@ -39,9 +35,9 @@ public class UserEntity {
     private CategoryElementEntity categoryElementEntity;
 
     @Column(name = "LOCKED")
-    private Boolean locked;
+    private boolean locked;
 
     @Column(name = "ENABLED")
-    private Boolean enabled;
+    private boolean enabled;
 
 }
