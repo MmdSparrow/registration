@@ -46,7 +46,7 @@ public class CategoryElementRepository extends ParentRepository {
         }
     }
 
-    public List<CategoryElementDto> search(String code, String title, long categoryId, String categoryCode, String categoryTitle) {
+    public List<CategoryElementDto> search(String code, String title, Long categoryId, String categoryCode, String categoryTitle) {
         List<CategoryElementEntity> categoryElementEntityList;
         if(categoryCode==null){
             categoryElementEntityList = categoryElementRepository.search(code, title, categoryId);
@@ -57,7 +57,7 @@ public class CategoryElementRepository extends ParentRepository {
     }
 
 
-    public List<CategoryElementDto> search(String code, String title, long categoryId, String categoryCode, String categoryTitle, int offset, int size) {
+    public List<CategoryElementDto> search(String code, String title, Long categoryId, String categoryCode, String categoryTitle, int offset, int size) {
         List<CategoryElementEntity> categoryElementEntityList;
         if(categoryCode==null){
             categoryElementEntityList = categoryElementRepository.search(code, title, categoryId, offset, size);

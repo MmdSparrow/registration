@@ -1,11 +1,15 @@
 package ir.blacksparrow.websitebackend.business.sevice.categoryElement;
 
 import ir.blacksparrow.websitebackend.business.dto.CategoryElementDto;
+import ir.blacksparrow.websitebackend.business.dto.CategoryElementDtoChildId;
+import ir.blacksparrow.websitebackend.repository.category.CategoryRepository;
 import ir.blacksparrow.websitebackend.repository.categoryElement.CategoryElementRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 @AllArgsConstructor
@@ -13,6 +17,7 @@ import java.util.Optional;
 public class CategoryElementService implements ICategoryElementService {
 
     private final CategoryElementRepository categoryElementRepository;
+    private final CategoryRepository categoryRepository;
 
     @Override
     public List<CategoryElementDto> getCategoryElementList() {
@@ -25,8 +30,15 @@ public class CategoryElementService implements ICategoryElementService {
     }
 
     @Override
-    public List<CategoryElementDto> searchCategoryElement(String code, String title, Long categoryId, String categoryCode) {
-        return null;
+    public List<CategoryElementDto> searchCategoryElement(CategoryElementDto categoryElementDto) {
+        return categoryElementRepository.search(categoryElementDto.getCode(),categoryElementDto.getTitle(),categoryElementDto.getCategory().getId(),categoryElementDto.getCategory().getCode(), categoryElementDto.getCategory().getTitle());
+
+
+    }
+
+    @Override
+    public List<CategoryElementDto> searchCategoryElement(CategoryElementDto categoryElementDto, int offset, int size) {
+        return categoryElementRepository.search(categoryElementDto.getCode(),categoryElementDto.getTitle(),categoryElementDto.getCategory().getId(),categoryElementDto.getCategory().getCode(), categoryElementDto.getCategory().getTitle(), offset, size);
     }
 
     @Override
@@ -35,17 +47,23 @@ public class CategoryElementService implements ICategoryElementService {
     }
 
     @Override
-    public Optional<CategoryElementDto> insertAndUpdateCategoryElement(CategoryElementDto categoryElementDto) {
+    public Optional<CategoryElementDto> insertAndUpdateCategoryElement(CategoryElementDtoChildId categoryElementDtoChildId) {
+        CategoryElementDto categoryElementDto=new CategoryElementDto(categoryElementDtoChildId.getId(), categoryElementDtoChildId.getCode(), categoryElementDtoChildId.getTitle(), categoryRepository.getById(categoryElementDtoChildId.getCategoryId()).orElse(null));
         return categoryElementRepository.insertAndUpdate(categoryElementDto);
     }
 
     @Override
-    public List<CategoryElementDto> insertAndUpdateAllCategoryElement(List<CategoryElementDto> categoryElementDtoList) {
+    public List<CategoryElementDto> insertAndUpdateAllCategoryElement(List<CategoryElementDtoChildId> categoryElementDtoChildIdList) {
+        List<CategoryElementDto> categoryElementDtoList=new ArrayList<>();
+        for(CategoryElementDtoChildId categoryElementDtoChildId: categoryElementDtoChildIdList){
+            CategoryElementDto categoryElementDto=new CategoryElementDto(categoryElementDtoChildId.getId(), categoryElementDtoChildId.getCode(), categoryElementDtoChildId.getTitle(), categoryRepository.getById(categoryElementDtoChildId.getCategoryId()).orElse(null));
+            categoryElementDtoList.add(categoryElementDto);
+        }
         return categoryElementRepository.insertAndUpdateAll(categoryElementDtoList);
     }
 
     @Override
-    public void deleteCategory(Long id) {
+    public void deleteCategoryElement(Long id) {
         categoryElementRepository.delete(id);
     }
 }

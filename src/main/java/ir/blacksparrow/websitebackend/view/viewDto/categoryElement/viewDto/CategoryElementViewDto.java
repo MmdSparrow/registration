@@ -4,8 +4,8 @@ import ir.blacksparrow.websitebackend.view.viewDto.category.viewDto.CategoryView
 import lombok.Data;
 
 @Data
-public class CategoryElement {
+public class CategoryElementViewDto {
     private String code;
     private String title;
-    private CategoryViewDto category;
+    private Long categoryId;
 }
