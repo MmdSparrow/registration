@@ -17,7 +17,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-@Transactional
+//@Transactional
 @RestController
 @RequestMapping("/category")
 public class CategoryController extends ParentController {

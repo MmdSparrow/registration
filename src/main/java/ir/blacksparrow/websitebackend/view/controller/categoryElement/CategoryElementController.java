@@ -19,7 +19,6 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-//@Transactional
 @RestController
 @RequestMapping("/category-element")
 public class CategoryElementController extends ParentController {
