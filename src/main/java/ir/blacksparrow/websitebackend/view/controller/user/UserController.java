@@ -2,6 +2,7 @@ package ir.blacksparrow.websitebackend.view.controller.user;
 
 import ir.blacksparrow.websitebackend.business.dto.PersonDto;
 import ir.blacksparrow.websitebackend.business.dto.UserDto;
+import ir.blacksparrow.websitebackend.business.sevice.categoryElement.CategoryElementService;
 import ir.blacksparrow.websitebackend.business.sevice.registrationService.RegistrationService;
 import ir.blacksparrow.websitebackend.view.controller.ParentController;
 import ir.blacksparrow.websitebackend.view.viewDto.user.viewDto.UserViewDtoObjectChild;
@@ -18,10 +19,12 @@ import javax.validation.Valid;
 public class UserController extends ParentController {
 
     private final RegistrationService registrationService;
+    private final CategoryElementService categoryElementService;
 
-    public UserController(ModelMapper modelMapper, RegistrationService registrationService) {
+    public UserController(ModelMapper modelMapper, RegistrationService registrationService, CategoryElementService categoryElementService) {
         super(modelMapper);
         this.registrationService = registrationService;
+        this.categoryElementService = categoryElementService;
     }
 
     @PostMapping
@@ -33,7 +36,8 @@ public class UserController extends ParentController {
                 request.getUsername(),
                 request.getPassword(),
                 request.getEmailAddress(),
-                getModelMapper().map(request.getPerson(), PersonDto.class)
+                getModelMapper().map(request.getPerson(), PersonDto.class),
+                categoryElementService.getCategoryElementById(request.getCategoryElementId()).orElse(null)
         ));
     }
 }

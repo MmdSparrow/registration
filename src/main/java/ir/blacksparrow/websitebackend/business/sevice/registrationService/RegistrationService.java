@@ -23,7 +23,8 @@ public class RegistrationService implements IRegistrationService{
                         request.getUsername(),
                         request.getPassword(),
                         request.getEmailAddress(),
-                        request.getPerson()
+                        request.getPerson(),
+                        request.getCategoryElement()
                 )
         );
     }

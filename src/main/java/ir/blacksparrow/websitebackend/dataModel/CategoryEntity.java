@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 })
 public class CategoryEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "ID")
     private long id;
 
