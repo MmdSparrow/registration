@@ -1,7 +1,5 @@
 package ir.blacksparrow.websitebackend.business.sevice.user;
 
-import ir.blacksparrow.websitebackend.business.dto.CategoryElementDto;
-import ir.blacksparrow.websitebackend.business.dto.TokenConfirmationDto;
 import ir.blacksparrow.websitebackend.business.dto.TokenConfirmationDtoChild;
 import ir.blacksparrow.websitebackend.business.dto.UserDto;
 import ir.blacksparrow.websitebackend.repository.person.PersonRepository;
@@ -16,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.rmi.ServerException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;

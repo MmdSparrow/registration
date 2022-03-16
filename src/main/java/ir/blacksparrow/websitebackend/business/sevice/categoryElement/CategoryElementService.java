@@ -1,7 +1,7 @@
 package ir.blacksparrow.websitebackend.business.sevice.categoryElement;
 
+import ir.blacksparrow.websitebackend.business.dto.CategoryElementDtoChild;
 import ir.blacksparrow.websitebackend.business.dto.CategoryElementDto;
-import ir.blacksparrow.websitebackend.business.dto.CategoryElementDtoChildId;
 import ir.blacksparrow.websitebackend.repository.category.CategoryRepository;
 import ir.blacksparrow.websitebackend.repository.categoryElement.CategoryElementRepository;
 import lombok.AllArgsConstructor;
@@ -19,59 +19,59 @@ public class CategoryElementService implements ICategoryElementService {
     private final CategoryRepository categoryRepository;
 
     @Override
-    public List<CategoryElementDto> getCategoryElementList() {
+    public List<CategoryElementDtoChild> getCategoryElementList() {
         return categoryElementRepository.findAll();
     }
 
     @Override
-    public List<CategoryElementDto> getCategoryElementList(int offset, int size) {
+    public List<CategoryElementDtoChild> getCategoryElementList(int offset, int size) {
         return categoryElementRepository.findAll(offset, size);
     }
 
     @Override
-    public List<CategoryElementDto> searchCategoryElement(CategoryElementDto categoryElementDto) {
-        return categoryElementRepository.search(categoryElementDto.getCode(),categoryElementDto.getTitle(),categoryElementDto.getCategory().getId(),categoryElementDto.getCategory().getCode(), categoryElementDto.getCategory().getTitle());
+    public List<CategoryElementDtoChild> searchCategoryElement(CategoryElementDtoChild categoryElementDtoChild) {
+        return categoryElementRepository.search(categoryElementDtoChild.getCode(), categoryElementDtoChild.getTitle(), categoryElementDtoChild.getCategory().getId(), categoryElementDtoChild.getCategory().getCode(), categoryElementDtoChild.getCategory().getTitle());
     }
 
     @Override
-    public List<CategoryElementDto> searchCategoryElement(CategoryElementDto categoryElementDto, int offset, int size) {
+    public List<CategoryElementDtoChild> searchCategoryElement(CategoryElementDtoChild categoryElementDtoChild, int offset, int size) {
         return categoryElementRepository.search(
-                categoryElementDto.getCode(),
-                categoryElementDto.getTitle(),
-                categoryElementDto.getCategory().getId(),
-                categoryElementDto.getCategory().getCode(),
-                categoryElementDto.getCategory().getTitle(),
+                categoryElementDtoChild.getCode(),
+                categoryElementDtoChild.getTitle(),
+                categoryElementDtoChild.getCategory().getId(),
+                categoryElementDtoChild.getCategory().getCode(),
+                categoryElementDtoChild.getCategory().getTitle(),
                 offset,
                 size);
     }
 
     @Override
-    public Optional<CategoryElementDto> getCategoryElementById(long id) {
+    public Optional<CategoryElementDtoChild> getCategoryElementById(long id) {
         return categoryElementRepository.getById(id);
     }
 
     @Override
-    public Optional<CategoryElementDto> insertAndUpdateCategoryElement(CategoryElementDtoChildId categoryElementDtoChildId) {
-        CategoryElementDto categoryElementDto=new CategoryElementDto(
-                categoryElementDtoChildId.getId(),
-                categoryElementDtoChildId.getCode(),
-                categoryElementDtoChildId.getTitle(),
-                categoryRepository.getById(categoryElementDtoChildId.getCategoryId()).orElse(null));
-        return categoryElementRepository.insertAndUpdate(categoryElementDto);
+    public Optional<CategoryElementDtoChild> insertAndUpdateCategoryElement(CategoryElementDto categoryElementDto) {
+        CategoryElementDtoChild categoryElementDtoChild =new CategoryElementDtoChild(
+                categoryElementDto.getId(),
+                categoryElementDto.getCode(),
+                categoryElementDto.getTitle(),
+                categoryRepository.getById(categoryElementDto.getCategoryId()).orElse(null));
+        return categoryElementRepository.insertAndUpdate(categoryElementDtoChild);
     }
 
     @Override
-    public List<CategoryElementDto> insertAndUpdateAllCategoryElement(List<CategoryElementDtoChildId> categoryElementDtoChildIdList) {
-        List<CategoryElementDto> categoryElementDtoList=new ArrayList<>();
-        for(CategoryElementDtoChildId categoryElementDtoChildId: categoryElementDtoChildIdList){
-            CategoryElementDto categoryElementDto=new CategoryElementDto(
-                    categoryElementDtoChildId.getId(),
-                    categoryElementDtoChildId.getCode(),
-                    categoryElementDtoChildId.getTitle(),
-                    categoryRepository.getById(categoryElementDtoChildId.getCategoryId()).orElse(null));
-            categoryElementDtoList.add(categoryElementDto);
+    public List<CategoryElementDtoChild> insertAndUpdateAllCategoryElement(List<CategoryElementDto> categoryElementDtoList) {
+        List<CategoryElementDtoChild> categoryElementDtoChildList =new ArrayList<>();
+        for(CategoryElementDto categoryElementDto : categoryElementDtoList){
+            CategoryElementDtoChild categoryElementDtoChild =new CategoryElementDtoChild(
+                    categoryElementDto.getId(),
+                    categoryElementDto.getCode(),
+                    categoryElementDto.getTitle(),
+                    categoryRepository.getById(categoryElementDto.getCategoryId()).orElse(null));
+            categoryElementDtoChildList.add(categoryElementDtoChild);
         }
-        return categoryElementRepository.insertAndUpdateAll(categoryElementDtoList);
+        return categoryElementRepository.insertAndUpdateAll(categoryElementDtoChildList);
     }
 
     @Override

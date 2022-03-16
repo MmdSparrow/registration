@@ -1,21 +1,21 @@
 package ir.blacksparrow.websitebackend.view.controller.categoryElement;
 
 import ir.blacksparrow.websitebackend.business.dto.CategoryDto;
+import ir.blacksparrow.websitebackend.business.dto.CategoryElementDtoChild;
 import ir.blacksparrow.websitebackend.business.dto.CategoryElementDto;
-import ir.blacksparrow.websitebackend.business.dto.CategoryElementDtoChildId;
 import ir.blacksparrow.websitebackend.business.dto.ResponseDto;
 import ir.blacksparrow.websitebackend.business.sevice.categoryElement.ICategoryElementService;
 import ir.blacksparrow.websitebackend.view.controller.ParentController;
 import ir.blacksparrow.websitebackend.view.controller.categoryElement.validator.CategoryElementValidator;
-import ir.blacksparrow.websitebackend.view.viewDto.category.viewDto.CategoryViewDto;
 import ir.blacksparrow.websitebackend.view.viewDto.categoryElement.viewDto.CategoryElementViewDto;
+import org.modelmapper.Condition;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeMap;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,6 +28,12 @@ public class CategoryElementController extends ParentController {
     public CategoryElementController(ModelMapper modelMapper, ICategoryElementService categoryElementService) {
         super(modelMapper);
         this.categoryElementService = categoryElementService;
+
+        TypeMap<CategoryElementViewDto, CategoryElementDto> propertyMapper = getModelMapper().createTypeMap(CategoryElementViewDto.class, CategoryElementDto.class);
+        propertyMapper.addMappings(mp->{
+            mp.map(CategoryElementViewDto::getCategoryId, CategoryElementDto::setCategoryId);
+            mp.skip(CategoryElementDto::setId);
+        });
     }
 
     @GetMapping(
@@ -41,15 +47,15 @@ public class CategoryElementController extends ParentController {
             return sendResponse(new ResponseDto(false, "invalid size or offset", null), HttpStatus.BAD_REQUEST);
         if(size==null){
             try{
-                List<CategoryElementDto> categoryElementDtoList = categoryElementService.getCategoryElementList();
-                return sendResponse(new ResponseDto(true,null,categoryElementDtoList, categoryElementDtoList.size()), HttpStatus.OK);
+                List<CategoryElementDtoChild> categoryElementDtoChildList = categoryElementService.getCategoryElementList();
+                return sendResponse(new ResponseDto(true,null, categoryElementDtoChildList, categoryElementDtoChildList.size()), HttpStatus.OK);
             } catch (Exception e) {
                 return sendResponse(new ResponseDto(false, e.getMessage(), null), HttpStatus.BAD_REQUEST);
             }
         }else {
             try{
-                List<CategoryElementDto> categoryElementDtoList = categoryElementService.getCategoryElementList(offset, size);
-                return sendResponse(new ResponseDto(true,null,categoryElementDtoList,categoryElementDtoList.size()), HttpStatus.OK);
+                List<CategoryElementDtoChild> categoryElementDtoChildList = categoryElementService.getCategoryElementList(offset, size);
+                return sendResponse(new ResponseDto(true,null, categoryElementDtoChildList, categoryElementDtoChildList.size()), HttpStatus.OK);
             } catch (Exception e) {
                 return sendResponse(new ResponseDto(false, e.getMessage(), null), HttpStatus.BAD_REQUEST);
             }
@@ -60,11 +66,11 @@ public class CategoryElementController extends ParentController {
             path = "/{id}",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<ResponseDto>  getCategoryById(
+    public ResponseEntity<ResponseDto>  getCategoryElementById(
             @PathVariable Long id
     ) {
         try {
-            Optional<CategoryElementDto> categoryElementDto = categoryElementService.getCategoryElementById(id);
+            Optional<CategoryElementDtoChild> categoryElementDto = categoryElementService.getCategoryElementById(id);
             return sendResponse(new ResponseDto(true,null,categoryElementDto), HttpStatus.OK);
         } catch (Exception e) {
             return sendResponse(new ResponseDto(false,e.getMessage(),null),HttpStatus.BAD_REQUEST);
@@ -75,7 +81,7 @@ public class CategoryElementController extends ParentController {
             path = "/search",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<ResponseDto> searchCategory(
+    public ResponseEntity<ResponseDto> searchCategoryElement(
             @RequestParam(value = "code", required = false) String code,
             @RequestParam(value = "title", required = false) String title,
             @RequestParam(value = "CategoryId", required = false) Long categoryId,
@@ -90,18 +96,18 @@ public class CategoryElementController extends ParentController {
         if(size==null){
             try{
                 CategoryDto categoryDto=new CategoryDto(categoryId, categoryCode, categoryTitle);
-                CategoryElementDto categoryElementDto=new CategoryElementDto(code,title,categoryDto);
-                List<CategoryElementDto> categoryElementDtoList = categoryElementService.searchCategoryElement(categoryElementDto);
-                return sendResponse(new ResponseDto(true,null,categoryElementDtoList,categoryElementDtoList.size()), HttpStatus.OK);
+                CategoryElementDtoChild categoryElementDtoChild =new CategoryElementDtoChild(code,title,categoryDto);
+                List<CategoryElementDtoChild> categoryElementDtoChildList = categoryElementService.searchCategoryElement(categoryElementDtoChild);
+                return sendResponse(new ResponseDto(true,null, categoryElementDtoChildList, categoryElementDtoChildList.size()), HttpStatus.OK);
             } catch (Exception e) {
                 return sendResponse(new ResponseDto(false, e.getMessage(), null), HttpStatus.BAD_REQUEST);
             }
         }else {
             try{
                 CategoryDto categoryDto=new CategoryDto(categoryId, categoryCode, categoryTitle);
-                CategoryElementDto categoryElementDto=new CategoryElementDto(code,title,categoryDto);
-                List<CategoryElementDto> categoryElementDtoList = categoryElementService.searchCategoryElement(categoryElementDto, offset, size);
-                return sendResponse(new ResponseDto(true,null,categoryElementDtoList,categoryElementDtoList.size()), HttpStatus.OK);
+                CategoryElementDtoChild categoryElementDtoChild =new CategoryElementDtoChild(code,title,categoryDto);
+                List<CategoryElementDtoChild> categoryElementDtoChildList = categoryElementService.searchCategoryElement(categoryElementDtoChild, offset, size);
+                return sendResponse(new ResponseDto(true,null, categoryElementDtoChildList, categoryElementDtoChildList.size()), HttpStatus.OK);
             } catch (Exception e) {
                 return sendResponse(new ResponseDto(false, e.getMessage(), null), HttpStatus.BAD_REQUEST);
             }
@@ -109,16 +115,19 @@ public class CategoryElementController extends ParentController {
     }
 
 
+
     @PostMapping(
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<ResponseDto> addCategory(
+    public ResponseEntity<ResponseDto> addCategoryElement(
             @RequestBody CategoryElementViewDto categoryElement
     ) {
         try {
-            Optional<CategoryElementDto> categoryElementDto = categoryElementService.insertAndUpdateCategoryElement(getModelMapper().map(categoryElement, CategoryElementDtoChildId.class));
-            return sendResponse(new ResponseDto(true, null, categoryElementDto), HttpStatus.OK);
+            CategoryElementDto categoryElementDto=getModelMapper().map(categoryElement, CategoryElementDto.class);
+            categoryElementDto.setId(null); //TODO
+            Optional<CategoryElementDtoChild> optionalCategoryElementDtoChild = categoryElementService.insertAndUpdateCategoryElement(categoryElementDto);
+            return sendResponse(new ResponseDto(true, null, optionalCategoryElementDtoChild), HttpStatus.OK);
         } catch (Exception e) {
             return sendResponse(new ResponseDto(false, e.getMessage(), null), HttpStatus.BAD_REQUEST);
         }
@@ -129,15 +138,15 @@ public class CategoryElementController extends ParentController {
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<ResponseDto> editCategory(
+    public ResponseEntity<ResponseDto> editCategoryElement(
             @RequestBody CategoryElementViewDto categoryElement,
             @PathVariable Long id
     ) {
         try {
-            CategoryElementDtoChildId categoryElementDtoChildId = getModelMapper().map(categoryElement, CategoryElementDtoChildId.class);
-            categoryElementDtoChildId.setId(id);
-            CategoryElementDto categoryElementDto = categoryElementService.insertAndUpdateCategoryElement(categoryElementDtoChildId).orElse(null);
-            return sendResponse(new ResponseDto(true,null, categoryElementDto), HttpStatus.OK);
+            CategoryElementDto categoryElementDto = getModelMapper().map(categoryElement, CategoryElementDto.class);
+            categoryElementDto.setId(id);
+            CategoryElementDtoChild categoryElementDtoChild = categoryElementService.insertAndUpdateCategoryElement(categoryElementDto).orElse(null);
+            return sendResponse(new ResponseDto(true,null, categoryElementDtoChild), HttpStatus.OK);
         } catch (Exception e) {
             return sendResponse(new ResponseDto(false,e.getMessage(),null),HttpStatus.BAD_REQUEST);
         }

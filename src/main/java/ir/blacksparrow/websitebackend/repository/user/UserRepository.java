@@ -1,7 +1,5 @@
 package ir.blacksparrow.websitebackend.repository.user;
 
-import com.sun.istack.NotNull;
-import ir.blacksparrow.websitebackend.business.dto.CategoryElementDto;
 import ir.blacksparrow.websitebackend.business.dto.UserDto;
 import ir.blacksparrow.websitebackend.dataModel.CategoryElementEntity;
 import ir.blacksparrow.websitebackend.dataModel.CategoryEntity;
@@ -13,8 +11,6 @@ import org.modelmapper.TypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.*;
-import java.util.Date;
 import java.util.Optional;
 
 

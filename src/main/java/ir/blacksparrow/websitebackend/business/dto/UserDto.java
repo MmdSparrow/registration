@@ -1,7 +1,5 @@
 package ir.blacksparrow.websitebackend.business.dto;
 
-import ir.blacksparrow.websitebackend.dataModel.CategoryElementEntity;
-import ir.blacksparrow.websitebackend.dataModel.PersonEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,7 +18,7 @@ public class UserDto  implements UserDetails {
     private String password;
     private String emailAddress;
     private PersonDto person;
-    private CategoryElementDto categoryElement;
+    private CategoryElementDtoChild categoryElement;
     private boolean locked;
     private boolean enabled;
 
@@ -32,7 +30,7 @@ public class UserDto  implements UserDetails {
         this.person = person;
     }
 
-    public UserDto(String username, String password, String emailAddress, PersonDto person, CategoryElementDto categoryElement) {
+    public UserDto(String username, String password, String emailAddress, PersonDto person, CategoryElementDtoChild categoryElement) {
         this.username = username;
         this.password = password;
         this.emailAddress = emailAddress;
