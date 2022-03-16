@@ -17,8 +17,16 @@ import javax.validation.constraints.NotNull;
         @UniqueConstraint(columnNames = {"CODE", "TITLE"})
 })
 public class CategoryEntity {
+    @SequenceGenerator(
+            name = "category_sequence",
+            sequenceName = "category_sequence",
+            allocationSize = 1
+    )
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "category_sequence"
+    )
     @Column(name = "ID")
     private long id;
 

@@ -16,8 +16,16 @@ import javax.persistence.*;
         @UniqueConstraint(columnNames = {"CODE", "TITLE", "CATEGORY_ID"})
 })
 public class CategoryElementEntity {
+    @SequenceGenerator(
+            name = "category_element_sequence",
+            sequenceName = "category_element_sequence",
+            allocationSize = 1
+    )
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "category_element_sequence"
+    )
     @Column(name = "ID")
     private long id;
 

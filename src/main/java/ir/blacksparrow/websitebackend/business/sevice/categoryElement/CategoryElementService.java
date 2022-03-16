@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 
 @AllArgsConstructor
@@ -36,7 +35,14 @@ public class CategoryElementService implements ICategoryElementService {
 
     @Override
     public List<CategoryElementDto> searchCategoryElement(CategoryElementDto categoryElementDto, int offset, int size) {
-        return categoryElementRepository.search(categoryElementDto.getCode(),categoryElementDto.getTitle(),categoryElementDto.getCategory().getId(),categoryElementDto.getCategory().getCode(), categoryElementDto.getCategory().getTitle(), offset, size);
+        return categoryElementRepository.search(
+                categoryElementDto.getCode(),
+                categoryElementDto.getTitle(),
+                categoryElementDto.getCategory().getId(),
+                categoryElementDto.getCategory().getCode(),
+                categoryElementDto.getCategory().getTitle(),
+                offset,
+                size);
     }
 
     @Override
@@ -46,7 +52,11 @@ public class CategoryElementService implements ICategoryElementService {
 
     @Override
     public Optional<CategoryElementDto> insertAndUpdateCategoryElement(CategoryElementDtoChildId categoryElementDtoChildId) {
-        CategoryElementDto categoryElementDto=new CategoryElementDto(categoryElementDtoChildId.getId(), categoryElementDtoChildId.getCode(), categoryElementDtoChildId.getTitle(), categoryRepository.getById(categoryElementDtoChildId.getCategoryId()).orElse(null));
+        CategoryElementDto categoryElementDto=new CategoryElementDto(
+                categoryElementDtoChildId.getId(),
+                categoryElementDtoChildId.getCode(),
+                categoryElementDtoChildId.getTitle(),
+                categoryRepository.getById(categoryElementDtoChildId.getCategoryId()).orElse(null));
         return categoryElementRepository.insertAndUpdate(categoryElementDto);
     }
 
@@ -54,7 +64,11 @@ public class CategoryElementService implements ICategoryElementService {
     public List<CategoryElementDto> insertAndUpdateAllCategoryElement(List<CategoryElementDtoChildId> categoryElementDtoChildIdList) {
         List<CategoryElementDto> categoryElementDtoList=new ArrayList<>();
         for(CategoryElementDtoChildId categoryElementDtoChildId: categoryElementDtoChildIdList){
-            CategoryElementDto categoryElementDto=new CategoryElementDto(categoryElementDtoChildId.getId(), categoryElementDtoChildId.getCode(), categoryElementDtoChildId.getTitle(), categoryRepository.getById(categoryElementDtoChildId.getCategoryId()).orElse(null));
+            CategoryElementDto categoryElementDto=new CategoryElementDto(
+                    categoryElementDtoChildId.getId(),
+                    categoryElementDtoChildId.getCode(),
+                    categoryElementDtoChildId.getTitle(),
+                    categoryRepository.getById(categoryElementDtoChildId.getCategoryId()).orElse(null));
             categoryElementDtoList.add(categoryElementDto);
         }
         return categoryElementRepository.insertAndUpdateAll(categoryElementDtoList);

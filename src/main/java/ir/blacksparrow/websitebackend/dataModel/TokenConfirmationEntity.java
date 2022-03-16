@@ -16,8 +16,16 @@ import java.time.LocalDateTime;
 @Table(name = "BS_TOKEN_CONFIRMATION")
 public class TokenConfirmationEntity {
 
+    @SequenceGenerator(
+            name = "token_confirmation_sequence",
+            sequenceName = "token_confirmation_sequence",
+            allocationSize = 1
+    )
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "token_confirmation_sequence"
+    )
     @Column(name = "ID")
     private long id;
 
