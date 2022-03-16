@@ -3,7 +3,7 @@ package ir.blacksparrow.websitebackend.view.controller.user;
 import ir.blacksparrow.websitebackend.business.dto.PersonDto;
 import ir.blacksparrow.websitebackend.business.dto.UserDto;
 import ir.blacksparrow.websitebackend.business.sevice.categoryElement.CategoryElementService;
-import ir.blacksparrow.websitebackend.business.sevice.registrationService.RegistrationService;
+import ir.blacksparrow.websitebackend.business.sevice.registration.RegistrationService;
 import ir.blacksparrow.websitebackend.view.controller.ParentController;
 import ir.blacksparrow.websitebackend.view.viewDto.user.viewDto.UserViewDtoObjectChild;
 import org.modelmapper.ModelMapper;
@@ -41,3 +41,4 @@ public class UserController extends ParentController {
         ));
     }
 }
+

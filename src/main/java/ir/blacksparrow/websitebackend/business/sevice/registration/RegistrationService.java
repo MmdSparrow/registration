@@ -1,4 +1,4 @@
-package ir.blacksparrow.websitebackend.business.sevice.registrationService;
+package ir.blacksparrow.websitebackend.business.sevice.registration;
 
 import ir.blacksparrow.websitebackend.business.dto.UserDto;
 import ir.blacksparrow.websitebackend.business.sevice.user.UserService;
@@ -18,6 +18,7 @@ public class RegistrationService implements IRegistrationService{
         if(!isValidEmail){
             throw new IllegalAccessException("email not valid");
         }
+        System.out.println(request.getCategoryElement().toString());
         return userService.signupUser(
                 new UserDto(
                         request.getUsername(),

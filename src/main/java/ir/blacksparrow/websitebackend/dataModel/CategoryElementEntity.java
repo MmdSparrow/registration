@@ -1,12 +1,14 @@
 package ir.blacksparrow.websitebackend.dataModel;
 
-import com.sun.istack.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 
-
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -15,18 +17,17 @@ import javax.persistence.*;
 })
 public class CategoryElementEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "ID")
     private long id;
 
-    @NotNull
-    @Column(name = "CODE")
+    @Column(name = "CODE", nullable = false)
     private String code;
 
-    @NotNull
-    @Column(name = "TITLE")
+    @Column(name = "TITLE", nullable = false)
     private String title;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "CATEGORY_ID", referencedColumnName = "ID")
+    @JoinColumn(name = "CATEGORY_ID", referencedColumnName = "ID", nullable = false)
     private CategoryEntity categoryEntity;
 }

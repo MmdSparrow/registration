@@ -6,6 +6,8 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Date;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -16,19 +18,15 @@ public class PersonEntity {
     @Column(name = "NATIONAL_ID")
     private String nationalId;
 
-    @NotNull
-    @Column(name = "FIRST_NAME")
+    @Column(name = "FIRST_NAME", nullable = false)
     private String firstName;
 
-    @NotNull
-    @Column(name = "LAST_NAME")
+    @Column(name = "LAST_NAME", nullable = false)
     private String lastName;
 
-    @NotNull
-    @Column(name = "BIRTH_DATE")
+    @Column(name = "BIRTH_DATE", nullable = false)
     private Date birthday;
 
-    @NotNull
     @Column(name = "BALACNE", columnDefinition = "REAL DEFAULT 0")
     private double balance;
 }

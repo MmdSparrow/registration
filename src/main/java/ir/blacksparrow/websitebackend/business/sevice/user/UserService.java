@@ -35,6 +35,11 @@ public class UserService implements IUserService, UserDetailsService {
         user.setPassword(encodedPassword);
 
         personRepository.insertAndUpdate(user.getPerson());
+
+        System.out.println("test,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
+        System.out.println(user.toString());
+        System.out.println("test,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
+
         userRepository.insert(user);
 
         //todo: send confirmation token

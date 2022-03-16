@@ -1,12 +1,15 @@
 package ir.blacksparrow.websitebackend.dataModel;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -19,11 +22,9 @@ public class CategoryEntity {
     @Column(name = "ID")
     private long id;
 
-    @NotNull
-    @Column(name = "CODE")
+    @Column(name = "CODE", nullable = false)
     private String code;
 
-    @NotNull
-    @Column(name = "TITLE")
+    @Column(name = "TITLE", nullable = false)
     private String title;
 }
