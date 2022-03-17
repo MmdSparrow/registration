@@ -1,12 +1,10 @@
 package ir.blacksparrow.websitebackend.view.viewDto.user.viewDto;
 
 //import com.sun.istack.NotNull;
-import ir.blacksparrow.websitebackend.dataModel.PersonEntity;
 import ir.blacksparrow.websitebackend.view.viewDto.person.viewDto.PersonViewDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -14,7 +12,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class UserViewDtoIdChild {
+public class UserViewDtoChild {
     @NotNull
     private String username;
 
@@ -26,8 +24,12 @@ public class UserViewDtoIdChild {
     private String emailAddress;
 
     @NotNull
-    private long personId;
+    private PersonViewDto person;
 
     @NotNull
     private long categoryElementId;
+
+    private Boolean locked;
+
+    private Boolean enabled;
 }

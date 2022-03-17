@@ -35,5 +35,5 @@ public class CategoryElementEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CATEGORY_ID", referencedColumnName = "ID", nullable = false)
-    private CategoryEntity categoryEntity;
+    private CategoryEntity category;
 }

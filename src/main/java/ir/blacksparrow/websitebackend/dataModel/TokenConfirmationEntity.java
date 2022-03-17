@@ -41,5 +41,5 @@ public class TokenConfirmationEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ENTITY", referencedColumnName = "USERNAME", nullable = false)
-    private UserEntity userEntity;
+    private UserEntity user;
 }

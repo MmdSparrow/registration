@@ -4,7 +4,6 @@ import ir.blacksparrow.websitebackend.business.dto.CategoryDto;
 import ir.blacksparrow.websitebackend.dataModel.CategoryEntity;
 import ir.blacksparrow.websitebackend.repository.ParentRepository;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -32,9 +31,6 @@ public class CategoryRepository extends ParentRepository {
 
     public Optional<CategoryDto> getById(long id) {
         CategoryEntity categoryEntity = categoryRepository.getById(id);
-        System.out.println(categoryEntity.getId());
-        System.out.println(categoryEntity.getCode());
-        System.out.println(categoryEntity.getTitle());
         return Optional.of(getModelMapper().map(categoryEntity, CategoryDto.class));
     }
 

@@ -19,24 +19,10 @@ public class TokenConfirmationRepository extends ParentRepository {
     public TokenConfirmationRepository(ModelMapper modelMapper, ITokenConfirmationRepository tokenConfirmationRepository) {
         super(modelMapper);
         this.tokenConfirmationRepository = tokenConfirmationRepository;
-
-        TypeMap<TokenConfirmationDtoChild, TokenConfirmationEntity> propertyMapper = getModelMapper().createTypeMap(TokenConfirmationDtoChild.class, TokenConfirmationEntity.class);
-        propertyMapper.addMappings(
-                mapper -> mapper.map(TokenConfirmationDtoChild::getUser, TokenConfirmationEntity::setUserEntity)
-        );
     }
 
     public Optional<TokenConfirmationDtoChild> insertAndUpdate(TokenConfirmationDtoChild tokenConfirmationDto) {
-        TokenConfirmationEntity tokenConfirmationEntity =new TokenConfirmationEntity();
-        tokenConfirmationEntity.setUserEntity(new UserEntity());
-        tokenConfirmationEntity = getModelMapper().map(tokenConfirmationDto, TokenConfirmationEntity.class);
-
-        System.out.println("test......................................");
-        System.out.println(tokenConfirmationDto.getUser().toString());
-        System.out.println("test......................................");
-        System.out.println(tokenConfirmationEntity.toString());
-        System.out.println("test......................................");
-
+        TokenConfirmationEntity tokenConfirmationEntity = getModelMapper().map(tokenConfirmationDto, TokenConfirmationEntity.class);
         tokenConfirmationEntity = tokenConfirmationRepository.save(tokenConfirmationEntity);
         return Optional.of(getModelMapper().map(tokenConfirmationEntity, TokenConfirmationDtoChild.class));
     }

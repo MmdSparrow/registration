@@ -19,10 +19,6 @@ public class CategoryElementRepository extends ParentRepository {
         super(modelMapper);
         this.categoryElementRepository = categoryElementRepository;
 
-        TypeMap<CategoryElementDtoChild, CategoryElementEntity> propertyMapper = modelMapper.createTypeMap(CategoryElementDtoChild.class, CategoryElementEntity.class);
-        propertyMapper.addMappings(
-                mapper -> mapper.map(CategoryElementDtoChild::getCategory, CategoryElementEntity::setCategoryEntity)
-        );
     }
 
     public List<CategoryElementDtoChild> findAll() {
@@ -36,12 +32,8 @@ public class CategoryElementRepository extends ParentRepository {
     }
 
     public Optional<CategoryElementDtoChild> getById(Long id) {
-        try {
-            CategoryElementEntity categoryElementEntity = categoryElementRepository.getById(id);
-            return Optional.of(getModelMapper().map(categoryElementEntity, CategoryElementDtoChild.class));
-        } catch (Exception e) {
-            return Optional.empty();
-        }
+        CategoryElementEntity categoryElementEntity = categoryElementRepository.getById(id);
+        return Optional.of(getModelMapper().map(categoryElementEntity, CategoryElementDtoChild.class));
     }
 
     public List<CategoryElementDtoChild> search(String code, String title, Long categoryId, String categoryCode, String categoryTitle) {

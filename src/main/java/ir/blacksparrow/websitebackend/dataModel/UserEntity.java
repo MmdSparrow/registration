@@ -29,12 +29,12 @@ public class UserEntity {
     @NotNull
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PERSON_ID", referencedColumnName = "NATIONAL_ID")
-    private PersonEntity personEntity;
+    private PersonEntity person;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CATEGORY_ELEMENT_ID", referencedColumnName = "ID")
-    private CategoryElementEntity categoryElementEntity;
+    private CategoryElementEntity categoryElement;
 
     @Column(name = "LOCKED")
     private boolean locked;
