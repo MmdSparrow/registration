@@ -7,10 +7,8 @@ import ir.blacksparrow.websitebackend.business.sevice.registration.RegistrationS
 import ir.blacksparrow.websitebackend.view.controller.ParentController;
 import ir.blacksparrow.websitebackend.view.viewDto.user.viewDto.UserViewDtoObjectChild;
 import org.modelmapper.ModelMapper;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -40,5 +38,17 @@ public class UserController extends ParentController {
                 categoryElementService.getCategoryElementById(request.getCategoryElementId()).orElse(null)
         ));
     }
+
+    @GetMapping(
+            path = "/confirm",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public String confirm(
+//            @RequestHeader("confirmToken") String confirmToken
+            @RequestParam("confirmToken") String confirmToken
+    ) throws IllegalAccessException {
+        return registrationService.confirmToken(confirmToken);
+    }
+
 }
 

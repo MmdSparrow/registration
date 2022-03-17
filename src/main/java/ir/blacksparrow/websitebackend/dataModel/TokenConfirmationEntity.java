@@ -1,13 +1,11 @@
 package ir.blacksparrow.websitebackend.dataModel;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -29,7 +27,7 @@ public class TokenConfirmationEntity {
     @Column(name = "ID")
     private long id;
 
-    @Column(name = "FIRST_NAME", nullable = false)
+    @Column(name = "TOKEN", nullable = false)
     private String token;
 
     @Column(name = "CREATE_TIME", nullable = false)
@@ -38,7 +36,7 @@ public class TokenConfirmationEntity {
     @Column(name = "EXPIRE_TIME", nullable = false)
     private LocalDateTime expireTime;
 
-    @Column(name = "CONFIRM_TIME", nullable = false)
+    @Column(name = "CONFIRM_TIME")
     private LocalDateTime confirmTime;
 
     @ManyToOne(fetch = FetchType.LAZY)

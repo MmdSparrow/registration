@@ -41,7 +41,7 @@ public class UserService implements IUserService, UserDetailsService {
 
 
 
-    @Transactional
+//    @Transactional
     @Override
     public String signupUser(UserDto user){
 //        boolean userExist = userRepository.findByEmail(user.getEmailAddress()).isPresent();
@@ -52,10 +52,6 @@ public class UserService implements IUserService, UserDetailsService {
         user.setPassword(encodedPassword);
 
         personRepository.insertAndUpdate(user.getPerson());
-
-        System.out.println("test,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
-        System.out.println(user.toString());
-        System.out.println("test,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
 
         userRepository.insert(user);
 
@@ -69,6 +65,10 @@ public class UserService implements IUserService, UserDetailsService {
                 LocalDateTime.now().plusMinutes(7),
                 user
         );
+
+        System.out.println("test token//////////////////////////////////////////");
+        System.out.println(tokenConfirmationDtoChild.toString());
+        System.out.println("test token//////////////////////////////////////////");
 
         tokenConfirmationRepository.insertAndUpdate(tokenConfirmationDtoChild);
 
