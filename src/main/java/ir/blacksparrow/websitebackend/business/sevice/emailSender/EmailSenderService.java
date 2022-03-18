@@ -1,8 +1,6 @@
-package ir.blacksparrow.websitebackend.business.sevice.email;
+package ir.blacksparrow.websitebackend.business.sevice.emailSender;
 
 import lombok.AllArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
@@ -13,7 +11,7 @@ import javax.mail.internet.MimeMessage;
 
 @AllArgsConstructor
 @Service
-public class EmailService implements IEmailService{
+public class EmailSenderService implements IEmailSenderService {
 //    private final static Logger LOGGER = LoggerFactory.getLogger(EmailService.class);
     private final JavaMailSender mailSender;
 

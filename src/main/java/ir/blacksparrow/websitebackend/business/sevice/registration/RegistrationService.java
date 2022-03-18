@@ -1,17 +1,15 @@
 package ir.blacksparrow.websitebackend.business.sevice.registration;
 
-import ir.blacksparrow.websitebackend.business.dto.TokenConfirmationDto;
 import ir.blacksparrow.websitebackend.business.dto.TokenConfirmationDtoChild;
 import ir.blacksparrow.websitebackend.business.dto.UserDto;
-import ir.blacksparrow.websitebackend.business.sevice.email.EmailService;
+import ir.blacksparrow.websitebackend.business.sevice.emailSender.EmailSenderService;
+import ir.blacksparrow.websitebackend.business.sevice.registration.validation.Validator;
 import ir.blacksparrow.websitebackend.business.sevice.tokenConfirmation.TokenConfirmationService;
 import ir.blacksparrow.websitebackend.business.sevice.user.UserService;
-import ir.blacksparrow.websitebackend.business.sevice.emailValidator.EmailValidatorService;
 import ir.blacksparrow.websitebackend.repository.tokenConfirmation.TokenConfirmationRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
@@ -19,29 +17,30 @@ import java.time.LocalDateTime;
 public class RegistrationService implements IRegistrationService{
 
     private final UserService userService;
-    private final EmailValidatorService emailValidatorService;
     private final TokenConfirmationRepository tokenConfirmationRepository;
     private final TokenConfirmationService tokenConfirmationService;
-    private final EmailService emailService;
+    private final EmailSenderService emailSenderService;
+    private final Validator validator;
 
     @Override
-    public String register(UserDto request) throws IllegalAccessException {
-        boolean isValidEmail = emailValidatorService.test(request.getEmailAddress());
+    public String register(UserDto userDto) throws IllegalAccessException {
+        boolean isValidEmail = validator.checkEmail(userDto.getEmailAddress());
         if(!isValidEmail){
             throw new IllegalAccessException("email not valid");
         }
-        System.out.println(request.getCategoryElement().toString());
+
         String token=userService.signupUser(
-                new UserDto(
-                        request.getUsername(),
-                        request.getPassword(),
-                        request.getEmailAddress(),
-                        request.getPerson(),
-                        request.getCategoryElement()
-                )
+//                new UserDto(
+//                        request.getUsername(),
+//                        request.getPassword(),
+//                        request.getEmailAddress(),
+//                        request.getPerson(),
+//                        request.getCategoryElement()
+//                )
+                userDto
         );
         String link = "http://localhost:8080/user/confirm?confirmToken=" + token;
-        emailService.send(request.getEmailAddress(), emailBuilder(request.getPerson().getFirstName(), link));
+        emailSenderService.send(userDto.getEmailAddress(), emailBuilder(userDto.getPerson().getFirstName(), link));
         return token;
     }
 
