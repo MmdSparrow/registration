@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
+import static ir.blacksparrow.websitebackend.constant.Constant.EmailSender.SENDER_EMAIL_ADDRESS;
+
 @AllArgsConstructor
 @Service
 public class EmailSenderService implements IEmailSenderService {
@@ -22,7 +24,8 @@ public class EmailSenderService implements IEmailSenderService {
             MimeMessage mimeMessage=mailSender.createMimeMessage();
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, "utf-8");
             messageHelper.setText(email, true);
-            messageHelper.setFrom("temp.sender.317@gmail.com");
+
+            messageHelper.setFrom(SENDER_EMAIL_ADDRESS);
             messageHelper.setTo(to);
             messageHelper.setSubject("Email Confirmation");
             mailSender.send(mimeMessage);

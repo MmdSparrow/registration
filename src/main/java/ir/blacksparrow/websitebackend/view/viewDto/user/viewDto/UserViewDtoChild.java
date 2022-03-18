@@ -28,8 +28,4 @@ public class UserViewDtoChild {
 
     @NotNull
     private long categoryElementId;
-
-    private Boolean locked;
-
-    private Boolean enabled;
 }
