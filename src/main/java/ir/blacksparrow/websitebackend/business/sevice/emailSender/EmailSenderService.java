@@ -1,7 +1,7 @@
 package ir.blacksparrow.websitebackend.business.sevice.emailSender;
 
 import ir.blacksparrow.websitebackend.business.dto.UserDto;
-import ir.blacksparrow.websitebackend.config.Configuration;
+//import ir.blacksparrow.websitebackend.config.Configuration;
 import lombok.AllArgsConstructor;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -11,19 +11,22 @@ import org.springframework.stereotype.Service;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
+import static ir.blacksparrow.websitebackend.constant.Constant.URL;
+
 @AllArgsConstructor
 @Service
 public class EmailSenderService implements IEmailSenderService {
     //    private final static Logger LOGGER = LoggerFactory.getLogger(EmailService.class);
     private final JavaMailSender mailSender;
-    private final Configuration configuration;
+//    private final Configuration configuration;
 
 
     @Async
     @Override
     public void send(UserDto userDto, String token) {
         try {
-            String link = configuration.getUrl() + "/user/confirm?confirmToken=" + token;
+//            String link = configuration.getUrl() + "/user/confirm?confirmToken=" + token;
+            String link = URL + "/user/confirm?confirmToken=" + token;
             MimeMessage mimeMessage = mailSender.createMimeMessage();
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, "utf-8");
             messageHelper.setText(emailBuilder(userDto.getPerson().getFirstName(), link), true);
