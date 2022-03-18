@@ -41,9 +41,9 @@ public class UserService implements IUserService, UserDetailsService {
 
     @Override
     public String signupUser(UserDto user){
-//        boolean userExist = userRepository.findByEmail(user.getEmailAddress()).isPresent();
-//        if(userExist)
-//            throw new IllegalStateException("email already exist!");
+        boolean userExist = userRepository.findByEmail(user.getEmailAddress()).isPresent();
+        if(userExist)
+            throw new IllegalStateException("email already exist!");
 
         String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
