@@ -42,22 +42,7 @@ public class Config {
 
     private Tag[] ApiDescriptions() {
         return new Tag[]{
-                new Tag("Category element", "Category elements are items in a enum e.g \"مدیر\" ,\"معلم\" ,\"دانش آموز\", etc for role.\nEvery element has a specific code to access."),
-                new Tag("Class", "To understand meaning of \"class\", consider the following examples:\n\"قرآن\" ,\"ریاضی\" ,\"علوم\", etc."),
-                new Tag("Classroom", ""),
-                new Tag("Educational stage", "Stage means level of education pattern system such as \"بتدایی\" and \"متوسطه\"."),
-                new Tag("Educational stage class", "\"Education stage class\" is stage part segments, suppose that stage part \"متوسطه اول\" which includes \"هشتم\" ,\"هفتم\" and \"نهم\"  classes."),
-                new Tag("Educational stage part", "To understand meaning of \"stage part\" suppose \"متوسطه\" stage, It is divided into two parts which are called \"متوسطه اول\" and \"متوسطه دوم\"."),
-                new Tag("Group", ""),
-                new Tag("Person", ""),
-                new Tag("Person role", "This service is relation between two entities \"person\" and \"role\". Because every person just have one role, a entity with name \"person role\" created and this service present all required apis.\n For some reason there is no api for edit role therefor you have to delete and create person again with correct role."),
-                new Tag("Role", "In school there are some roles and for now roles \"مدیر\" ,\"معلم\" ,\"دانش آموز\" and \"مدیر اصلی\" are implemented."),
-                new Tag("School", ""),
-                new Tag("SSO", "Authentication service based on single sign one (SSO) with two Apis for login and logout form POD."),
-                new Tag("Student", ""),
-                new Tag("Teacher", ""),
-                new Tag("Term", ""),
-                new Tag("Year", "")
+                new Tag("Category element", "Category elements are items which........"),
         };
     }
 }
