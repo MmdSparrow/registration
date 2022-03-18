@@ -8,10 +8,12 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.Optional;
 
 public interface IUserRepository extends JpaRepository<UserEntity,String> {
-    @Query
+    @Query(value = "SELECT * FROM BS_USER WHERE EMAIL_ADDRESS = ?1",
+            nativeQuery = true)
     Optional<UserEntity> findByEmailAddress(String emailAddress);
 
-    @Query
+    @Query(value = "SELECT * FROM BS_USER WHERE USERNAME = ?1",
+            nativeQuery = true)
     Optional<UserEntity> findByUsername(String username);
 //    Optional<UserEntity> insert(UserEntity userEntity);
 

@@ -49,6 +49,7 @@ public class UserController extends ParentController {
             @RequestHeader("confirmToken") String confirmToken
 //            @RequestParam("confirmToken") String confirmToken
     ) {
+        System.out.println(confirmToken);
         return registrationService.confirmToken(confirmToken);
     }
 

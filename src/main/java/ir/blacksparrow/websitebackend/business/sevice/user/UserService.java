@@ -26,7 +26,7 @@ public class UserService implements IUserService, UserDetailsService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final TokenConfirmationRepository tokenConfirmationRepository;
 
-
+    @Transactional
     @Override
     public UserDetails loadUserByUsername(String emailAddress) throws UsernameNotFoundException {
         return userRepository.findByEmail(emailAddress)
@@ -39,9 +39,6 @@ public class UserService implements IUserService, UserDetailsService {
                 .orElseThrow(()-> new UsernameNotFoundException("user not found!"));
     }
 
-
-
-//    @Transactional
     @Override
     public String signupUser(UserDto user){
 //        boolean userExist = userRepository.findByEmail(user.getEmailAddress()).isPresent();
@@ -83,6 +80,9 @@ public class UserService implements IUserService, UserDetailsService {
                 .findByEmail(emailAddress)
                 .orElseThrow(() -> new ServerException("email not found!"));
         userDto.setEnabled(true);
+        System.out.println("test..........................................................................");
+        System.out.println(userDto.toString());
+        System.out.println("test..........................................................................");
         return userRepository.insert(userDto);
     }
 }

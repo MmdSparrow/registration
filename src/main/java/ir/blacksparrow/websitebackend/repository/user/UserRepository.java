@@ -35,7 +35,12 @@ public class UserRepository extends ParentRepository {
     }
 
     public Optional<UserDto> findByEmail(String emailAddress){
-        return Optional.of(getModelMapper().map(userRepository.findByEmailAddress(emailAddress), UserDto.class));
+        System.out.println("22222222222222222222222222222222222222222222222222222222");
+        System.out.println(userRepository.findByEmailAddress(emailAddress));
+        System.out.println("22222222222222222222222222222222222222222222222222222222");
+        System.out.println(getModelMapper().map(userRepository.findByEmailAddress(emailAddress).orElse(null), UserDto.class));
+        System.out.println("22222222222222222222222222222222222222222222222222222222");
+        return Optional.of(getModelMapper().map(userRepository.findByEmailAddress(emailAddress).orElse(null), UserDto.class));
     }
 
     public Optional<UserDto> findByUsername(String username){
