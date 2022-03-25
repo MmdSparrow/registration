@@ -13,9 +13,12 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 //@Transactional
 @RestController
@@ -34,10 +37,20 @@ public class CategoryController extends ParentController {
     )
     public ResponseEntity<ResponseDto> findAllCategories(
             @RequestParam(value = "offset", required = false) Integer offset,
-            @RequestParam(value = "size", required = false) Integer size
+            @RequestParam(value = "size", required = false) Integer size,
+            HttpServletRequest request
     ) {
-        if (!CategoryValidator.isValidSizeOffset(size, offset))
-            return sendResponse(new ResponseDto(false, "invalid size or offset", null), HttpStatus.BAD_REQUEST);
+        if (!CategoryValidator.isValidSizeOffset(size, offset)) {
+            String lang= "en";
+            String country="US";
+            Locale locale= new Locale(lang, country);
+            ResourceBundle resourceBundle= ResourceBundle.getBundle("label",locale);
+            String message= resourceBundle.getString("invalidSizeOrOffset");
+
+            System.out.println(request.getRemoteAddr());
+            System.out.println(request.getLocalAddr());
+            return sendResponse(new ResponseDto(false, message, null), HttpStatus.BAD_REQUEST);
+        }
         if (size == null) {
             try {
                 List<CategoryDto> categoryDtoList = categoryService.getCategoryList();
