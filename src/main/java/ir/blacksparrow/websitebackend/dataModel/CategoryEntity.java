@@ -28,7 +28,7 @@ public class CategoryEntity {
     @Column(name = "ID")
     private long id;
 
-    @Column(name = "CODE", nullable = false)
+    @Column(name = "CODE", nullable = false, unique = true)
     private String code;
 
     @Column(name = "TITLE", nullable = false)

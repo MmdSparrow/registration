@@ -50,6 +50,6 @@ public class UserRepository extends ParentRepository {
     public Optional<UserDto> insert(UserDto user){
         UserEntity userEntity = getModelMapper().map(user, UserEntity.class);
         userEntity = userRepository.save(userEntity);
-        return Optional.of(user);        // todo
+        return Optional.of(getModelMapper().map(userEntity, UserDto.class));
     }
 }

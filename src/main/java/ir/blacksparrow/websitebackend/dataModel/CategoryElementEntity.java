@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Setter
 @Entity
 @Table(name = "BS_CATEGORY_ELEMENT", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"CODE", "TITLE", "CATEGORY_ID"})
+        @UniqueConstraint(columnNames = {"TITLE", "CATEGORY_ID"})
 })
 public class CategoryElementEntity {
     @SequenceGenerator(
@@ -27,7 +27,8 @@ public class CategoryElementEntity {
     @Column(name = "ID")
     private long id;
 
-    @Column(name = "CODE", nullable = false)
+
+    @Column(name = "CODE", nullable = false, unique = true)
     private String code;
 
     @Column(name = "TITLE", nullable = false)
