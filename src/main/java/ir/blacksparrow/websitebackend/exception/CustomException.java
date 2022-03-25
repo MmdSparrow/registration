@@ -1,12 +1,17 @@
 package ir.blacksparrow.websitebackend.exception;
 
+import lombok.Getter;
+
 import javax.servlet.http.HttpServletRequest;
 
-public class CustomException extends RuntimeException{
+@Getter
+public class CustomException extends RuntimeException {
+    private HttpServletRequest request;
+    private String labelKey;
 
-    public CustomException(String messageLabelKey, HttpServletRequest request) {
-        super(getMessageByKey(messageLabelKey, request));
+    public CustomException(HttpServletRequest request, String labelKey) {
+        super("");
+        this.request = request;
+        this.labelKey = labelKey;
     }
-
-    getMessageByKey
 }
