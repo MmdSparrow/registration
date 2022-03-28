@@ -1,4 +1,4 @@
-package ir.blacksparrow.websitebackend.business.comunication.GeoLocation;
+package ir.blacksparrow.websitebackend.business.comunication.geoLocation;
 
 import org.springframework.stereotype.Service;
 

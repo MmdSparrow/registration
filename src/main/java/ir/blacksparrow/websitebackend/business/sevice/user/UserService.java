@@ -52,7 +52,7 @@ public class UserService implements IUserService, UserDetailsService {
 
         userRepository.insert(user);
 
-        //todo: send confirmation token
+        //todo: send confirmation token need test
 
         String token=UUID.randomUUID().toString();
 
@@ -69,7 +69,7 @@ public class UserService implements IUserService, UserDetailsService {
 
         tokenConfirmationRepository.insertAndUpdate(tokenConfirmationDtoChild);
 
-        //todo: send email
+        //todo: send email need test
 
         return token;
     }

@@ -24,6 +24,6 @@ public class ResponseDto {
         this.success = success;
         this.message = message;
         this.data = data;
-        this.count = 1;
+        this.count = -1;
     }
 }

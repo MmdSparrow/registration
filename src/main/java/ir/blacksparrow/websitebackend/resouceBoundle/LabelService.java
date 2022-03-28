@@ -1,6 +1,6 @@
-package ir.blacksparrow.websitebackend.ResouceBoundle;
+package ir.blacksparrow.websitebackend.resouceBoundle;
 
-import ir.blacksparrow.websitebackend.business.comunication.GeoLocation.GeoLocationService;
+import ir.blacksparrow.websitebackend.business.comunication.geoLocation.GeoLocationService;
 import ir.blacksparrow.websitebackend.network.RequestIPService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

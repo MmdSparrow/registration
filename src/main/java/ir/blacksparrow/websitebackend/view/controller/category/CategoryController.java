@@ -4,6 +4,7 @@ import ir.blacksparrow.websitebackend.business.dto.CategoryDto;
 import ir.blacksparrow.websitebackend.business.dto.ResponseDto;
 import ir.blacksparrow.websitebackend.business.sevice.category.CategoryService;
 import ir.blacksparrow.websitebackend.business.sevice.category.ICategoryService;
+import ir.blacksparrow.websitebackend.exception.CustomException;
 import ir.blacksparrow.websitebackend.view.controller.ParentController;
 import ir.blacksparrow.websitebackend.view.controller.category.validator.CategoryValidator;
 import ir.blacksparrow.websitebackend.view.viewDto.category.viewDto.CategoryViewDto;
@@ -40,17 +41,8 @@ public class CategoryController extends ParentController {
             @RequestParam(value = "size", required = false) Integer size,
             HttpServletRequest request
     ) {
-        if (!CategoryValidator.isValidSizeOffset(size, offset)) {
-            String lang= "en";
-            String country="US";
-            Locale locale= new Locale(lang, country);
-            ResourceBundle resourceBundle= ResourceBundle.getBundle("label",locale);
-            String message= resourceBundle.getString("invalidSizeOrOffset");
-
-            System.out.println(request.getRemoteAddr());
-            System.out.println(request.getLocalAddr());
-            return sendResponse(new ResponseDto(false, message, null), HttpStatus.BAD_REQUEST);
-        }
+        if (!CategoryValidator.isValidSizeOffset(size, offset))
+            throw new CustomException(request, "invalidSizeOrOffset");
         if (size == null) {
             try {
                 List<CategoryDto> categoryDtoList = categoryService.getCategoryList();

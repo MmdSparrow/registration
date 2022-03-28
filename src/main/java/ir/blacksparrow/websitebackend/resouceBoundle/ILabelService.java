@@ -1,4 +1,4 @@
-package ir.blacksparrow.websitebackend.ResouceBoundle;
+package ir.blacksparrow.websitebackend.resouceBoundle;
 
 import javax.servlet.http.HttpServletRequest;
 
