@@ -46,8 +46,8 @@ public class UserController extends ParentController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public String confirm(
-            @RequestHeader("confirmToken") String confirmToken
-//            @RequestParam("confirmToken") String confirmToken
+//            @RequestHeader("confirmToken") String confirmToken
+            @RequestParam("confirmToken") String confirmToken
     ) {
         System.out.println(confirmToken);
         return registrationService.confirmToken(confirmToken);
