@@ -8,6 +8,7 @@ import ir.blacksparrow.websitebackend.business.sevice.tokenConfirmation.TokenCon
 import ir.blacksparrow.websitebackend.business.sevice.user.UserService;
 import ir.blacksparrow.websitebackend.repository.tokenConfirmation.TokenConfirmationRepository;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;

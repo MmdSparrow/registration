@@ -46,14 +46,14 @@ public class CategoryController extends ParentController {
         if (size == null) {
             try {
                 List<CategoryDto> categoryDtoList = categoryService.getCategoryList();
-                return sendResponse(new ResponseDto(true, null, categoryDtoList, categoryDtoList.size()), HttpStatus.OK);
+                return sendResponse(new ResponseDto(true, null, categoryDtoList.size(), categoryDtoList), HttpStatus.OK);
             } catch (Exception e) {
                 return sendResponse(new ResponseDto(false, e.getMessage(), null), HttpStatus.BAD_REQUEST);
             }
         } else {
             try {
                 List<CategoryDto> categoryDtoList = categoryService.getCategoryList(offset, size);
-                return sendResponse(new ResponseDto(true, null, categoryDtoList, categoryDtoList.size()), HttpStatus.OK);
+                return sendResponse(new ResponseDto(true, null, categoryDtoList.size(), categoryDtoList), HttpStatus.OK);
             } catch (Exception e) {
                 return sendResponse(new ResponseDto(false, e.getMessage(), null), HttpStatus.BAD_REQUEST);
             }
@@ -91,14 +91,14 @@ public class CategoryController extends ParentController {
         if (size == null) {
             try {
                 List<CategoryDto> categoryDtoList = categoryService.searchCategory(code, title);
-                return sendResponse(new ResponseDto(true, null, categoryDtoList, categoryDtoList.size()), HttpStatus.OK);
+                return sendResponse(new ResponseDto(true, null, categoryDtoList.size(), categoryDtoList), HttpStatus.OK);
             } catch (Exception e) {
                 return sendResponse(new ResponseDto(false, e.getMessage(), null), HttpStatus.BAD_REQUEST);
             }
         } else {
             try {
                 List<CategoryDto> categoryDtoList = categoryService.searchCategory(code, title, offset, size);
-                return sendResponse(new ResponseDto(true, null, categoryDtoList, categoryDtoList.size()), HttpStatus.OK);
+                return sendResponse(new ResponseDto(true, null, categoryDtoList.size(), categoryDtoList), HttpStatus.OK);
             } catch (Exception e) {
                 return sendResponse(new ResponseDto(false, e.getMessage(), null), HttpStatus.BAD_REQUEST);
             }

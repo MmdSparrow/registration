@@ -13,6 +13,7 @@ import org.modelmapper.TypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -35,12 +36,8 @@ public class UserRepository extends ParentRepository {
     }
 
     public Optional<UserDto> findByEmail(String emailAddress){
-        System.out.println("22222222222222222222222222222222222222222222222222222222");
-        System.out.println(userRepository.findByEmailAddress(emailAddress));
-        System.out.println("22222222222222222222222222222222222222222222222222222222");
-        System.out.println(getModelMapper().map(userRepository.findByEmailAddress(emailAddress).orElse(null), UserDto.class));
-        System.out.println("22222222222222222222222222222222222222222222222222222222");
-        return Optional.of(getModelMapper().map(userRepository.findByEmailAddress(emailAddress).orElse(null), UserDto.class));
+        List<UserEntity> userEntityList=userRepository.findTopByOrderByEmailAddress(emailAddress);
+        return (userEntityList== null || userEntityList.size()==0) ? Optional.empty(): Optional.of(getModelMapper().map(userRepository.findTopByOrderByEmailAddress(emailAddress).get(0), UserDto.class));
     }
 
     public Optional<UserDto> findByUsername(String username){

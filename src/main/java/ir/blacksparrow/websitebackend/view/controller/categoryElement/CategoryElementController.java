@@ -48,14 +48,14 @@ public class CategoryElementController extends ParentController {
         if(size==null){
             try{
                 List<CategoryElementDtoChild> categoryElementDtoChildList = categoryElementService.getCategoryElementList();
-                return sendResponse(new ResponseDto(true,null, categoryElementDtoChildList, categoryElementDtoChildList.size()), HttpStatus.OK);
+                return sendResponse(new ResponseDto(true,null, categoryElementDtoChildList.size(), categoryElementDtoChildList), HttpStatus.OK);
             } catch (Exception e) {
                 return sendResponse(new ResponseDto(false, e.getMessage(), null), HttpStatus.BAD_REQUEST);
             }
         }else {
             try{
                 List<CategoryElementDtoChild> categoryElementDtoChildList = categoryElementService.getCategoryElementList(offset, size);
-                return sendResponse(new ResponseDto(true,null, categoryElementDtoChildList, categoryElementDtoChildList.size()), HttpStatus.OK);
+                return sendResponse(new ResponseDto(true,null, categoryElementDtoChildList.size(), categoryElementDtoChildList), HttpStatus.OK);
             } catch (Exception e) {
                 return sendResponse(new ResponseDto(false, e.getMessage(), null), HttpStatus.BAD_REQUEST);
             }
@@ -98,7 +98,7 @@ public class CategoryElementController extends ParentController {
                 CategoryDto categoryDto=new CategoryDto(categoryId, categoryCode, categoryTitle);
                 CategoryElementDtoChild categoryElementDtoChild =new CategoryElementDtoChild(code,title,categoryDto);
                 List<CategoryElementDtoChild> categoryElementDtoChildList = categoryElementService.searchCategoryElement(categoryElementDtoChild);
-                return sendResponse(new ResponseDto(true,null, categoryElementDtoChildList, categoryElementDtoChildList.size()), HttpStatus.OK);
+                return sendResponse(new ResponseDto(true,null, categoryElementDtoChildList.size(), categoryElementDtoChildList), HttpStatus.OK);
             } catch (Exception e) {
                 return sendResponse(new ResponseDto(false, e.getMessage(), null), HttpStatus.BAD_REQUEST);
             }
@@ -107,7 +107,7 @@ public class CategoryElementController extends ParentController {
                 CategoryDto categoryDto=new CategoryDto(categoryId, categoryCode, categoryTitle);
                 CategoryElementDtoChild categoryElementDtoChild =new CategoryElementDtoChild(code,title,categoryDto);
                 List<CategoryElementDtoChild> categoryElementDtoChildList = categoryElementService.searchCategoryElement(categoryElementDtoChild, offset, size);
-                return sendResponse(new ResponseDto(true,null, categoryElementDtoChildList, categoryElementDtoChildList.size()), HttpStatus.OK);
+                return sendResponse(new ResponseDto(true,null, categoryElementDtoChildList.size(), categoryElementDtoChildList), HttpStatus.OK);
             } catch (Exception e) {
                 return sendResponse(new ResponseDto(false, e.getMessage(), null), HttpStatus.BAD_REQUEST);
             }

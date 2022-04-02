@@ -21,12 +21,13 @@ public class EmailSenderService implements IEmailSenderService {
 //    private final Configuration configuration;
 
 
-    @Async
     @Override
+    @Async
     public void send(UserDto userDto, String token) {
         try {
 //            String link = configuration.getUrl() + "/user/confirm?confirmToken=" + token;
             String link = URL + "/user/confirm?confirmToken=" + token;
+            System.out.println("link: "+ link);
             MimeMessage mimeMessage = mailSender.createMimeMessage();
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, "utf-8");
             messageHelper.setText(emailBuilder(userDto.getPerson().getFirstName(), link), true);
@@ -34,6 +35,7 @@ public class EmailSenderService implements IEmailSenderService {
 //            messageHelper.setFrom(SENDER_EMAIL_ADDRESS);
             messageHelper.setTo(userDto.getEmailAddress());
             messageHelper.setSubject("Email Confirmation");
+            messageHelper.setFrom("temp.sender.317@gmail.com");
             mailSender.send(mimeMessage);
         } catch (MessagingException e) {
 //            System.out.println(e.getMessage());

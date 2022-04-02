@@ -41,10 +41,20 @@ public class UserService implements IUserService, UserDetailsService {
 
     @Override
     public String signupUser(UserDto user){
+        System.out.println("i found the bug................................................");
+
+        System.out.println(user.getEmailAddress());
+        System.out.println(userRepository.findByEmail(user.getEmailAddress()));
         boolean userExist = userRepository.findByEmail(user.getEmailAddress()).isPresent();
         if(userExist)
             throw new IllegalStateException("email already exist!");
 
+        System.out.println("is not exist in database............................................");
+        System.out.println("is not exist in database............................................");
+        System.out.println("is not exist in database............................................");
+        System.out.println("is not exist in database............................................");
+        System.out.println("is not exist in database............................................");
+        System.out.println("is not exist in database............................................");
         String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
 

@@ -8,6 +8,6 @@ public class Validator implements IValidator{
     public boolean checkEmail(String emailAddress) {
         String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
 
-        return !emailAddress.matches(regex);
+        return emailAddress.matches(regex);
     }
 }
