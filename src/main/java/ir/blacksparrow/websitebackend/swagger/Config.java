@@ -12,9 +12,11 @@ import springfox.documentation.service.Contact;
 import springfox.documentation.service.Tag;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 
 @Configuration
+//@EnableSwagger2
 public class Config {
     @Bean
     public Docket DocketSwaggerConfiguration() {
@@ -29,13 +31,13 @@ public class Config {
 
     private ApiInfo ApiInfo() {
         return new ApiInfoBuilder()
-                .title("Digital School Api Documentation")
-                .description("Digital School Documentation - For Postman: /postman instead of /docs.")
+                .title("Black Sparrow Api Documentation")
+                .description("Black Sparrow Documentation - For Postman: /postman instead of /docs.")
                 .license("Apache 2.0")
                 .licenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html")
                 .termsOfServiceUrl("Terms of Service")
                 .version("1.0.0")
-                .contact(new Contact("Digital School", "https://blackSparrow.ir/", "esmirk.137@gmail.com")) //TODO
+                .contact(new Contact("Black Sparrow", "https://blackSparrow.ir/", "esmirk.137@gmail.com"))
                 .build();
     }
 
