@@ -1,6 +1,6 @@
 package ir.blacksparrow.websitebackend.view.viewDto.user.viewDto;
 
-//import com.sun.istack.NotNull;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
